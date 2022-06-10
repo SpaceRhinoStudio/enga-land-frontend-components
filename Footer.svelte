@@ -4,15 +4,9 @@
   import Link from './Link.svelte'
   import { __$ } from './locales'
   import { routeConfig, Routes } from './configs/routes'
+  import cn from 'classnames'
 
-  export let routes = [
-    Routes.home,
-    Routes.dapp,
-    Routes.marketplace,
-    Routes.docs,
-    Routes.help,
-    Routes.aboutUs,
-  ]
+  export let routes: Routes[]
 
   $: routeConfigs = routes.map(x => routeConfig[x])
   const socials = [Routes.telegram, Routes.twitter, Routes.discord, Routes.reddit].map(
@@ -21,13 +15,21 @@
 
   export let clientHeight: number
   export let style = ''
+
+  export let small = false
 </script>
 
 <footer
   bind:clientHeight
-  class="absolute bottom-0 bg-primary-800 !max-w-none left-1/2 -translate-x-1/2 md:shadow-float flex justify-center transition-transform duration-500"
+  class="absolute bottom-0 bg-primary-800 !max-w-none left-1/2 -translate-x-1/2 shadow-float flex justify-center transition-transform duration-500"
   {style}>
-  <div class="max-w-[min(calc(100%-theme(spacing.10)),theme(screens.2xl))] w-screen relative">
+  <div
+    class={cn(
+      small
+        ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
+        : 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.2xl))]',
+      'w-screen relative',
+    )}>
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <nav
         class="sm:gap-6 w-full text-text-primary flex flex-wrap items-center justify-between md:justify-center px-3 mx-auto md:px-0 pt-8">

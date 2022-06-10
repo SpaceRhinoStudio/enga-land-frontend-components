@@ -9,17 +9,8 @@
   import WithScrollHint from './WithScrollHint.svelte'
   import SidebarNavItem from './SidebarNavItem.svelte'
 
-  const routes = [
-    Routes.home,
-    Routes.dapp,
-    Routes.marketplace,
-    Routes.docs,
-    Routes.help,
-    Routes.tokenomics,
-    Routes.github,
-    Routes.community,
-    Routes.aboutUs,
-  ].map(x => config.routeConfig[x])
+  export let routes: Routes[]
+  $: routeConfigs = routes.map(x => config.routeConfig[x])
 
   export let isOpen = false
 </script>
@@ -44,7 +35,7 @@
         wrapper: 'flex flex-col justify-between -mx-6 pl-6 pt-5',
       }}>
       <ul class="grow-0">
-        {#each routes as nav}
+        {#each routeConfigs as nav}
           <SidebarNavItem item={nav} onRouteChange={() => (isOpen = false)} />
         {/each}
       </ul>
