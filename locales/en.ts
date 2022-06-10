@@ -1,5 +1,5 @@
 import { Routes } from '../configs/routes'
-import { ToastType } from '../../contexts/flash-toast'
+import { ToastType } from '../contexts/flash-toast'
 import {
   CosmeticSlots,
   EndroItemType,
@@ -7,9 +7,9 @@ import {
   ItemRarity,
   MainNFTTypes,
   Realms,
-} from '$lib/types/enga'
+} from '../types/enga'
 import { WebsiteLocale } from './interface'
-import { EndroSortOptions, MarketplaceSortOptions } from '$lib/types/marketplace'
+import { EndroSortOptions, MarketplaceSortOptions } from '../types/marketplace'
 
 const locale: WebsiteLocale = new WebsiteLocale({
   main: {

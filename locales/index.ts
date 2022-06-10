@@ -10,10 +10,10 @@ import {
   ReplaySubject,
   throwError,
 } from 'rxjs'
-import { ObservableError } from '$lib/classes/observable-error'
-import { flashToast$ } from '$lib/contexts/flash-toast'
+import { ObservableError } from '../classes/observable-error'
+import { flashToast$ } from '../contexts/flash-toast'
 import _ from 'lodash'
-import { unLazy } from '$lib/utils/un-lazy'
+import { unLazy } from '../utils/un-lazy'
 
 export const __$ = new ReplaySubject<WebsiteLocaleData>(1)
 export const locale$ = new BehaviorSubject<string>('en')
