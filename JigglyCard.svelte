@@ -1,14 +1,18 @@
 <script lang="ts">
-  import { spring } from 'svelte/motion'
+  import { SpringConfig } from 'wobble'
+
   import { canHover$ } from './helpers/media-queries'
+  import { useWobble } from './helpers/wobble-svelte'
 
   let measure: HTMLElement
   let whereTo = { x: 0, y: 0 }
-  const x = spring(0, { damping: 1, stiffness: 0.1, precision: 0.1 })
-  const y = spring(0, { damping: 1, stiffness: 0.1, precision: 0.1 })
+  export let config: Partial<SpringConfig> = {}
+  export let multiplier: number = 13
+  const [x, setX] = useWobble(config)
+  const [y, setY] = useWobble(config)
   $: {
-    x.set(whereTo.x)
-    y.set(whereTo.y)
+    setX(whereTo.x)
+    setY(whereTo.y)
   }
 
   export let disabled = false
@@ -29,8 +33,8 @@
     if ($canHover$ && !disabled) {
       const { top, left, height, width } = measure.getBoundingClientRect()
       whereTo = {
-        y: ((e.clientX - left) / width - 0.5) * 13,
-        x: -((e.clientY - top) / height - 0.5) * 13,
+        y: ((e.clientX - left) / width - 0.5) * multiplier,
+        x: -((e.clientY - top) / height - 0.5) * multiplier,
       }
     }
   }}>
