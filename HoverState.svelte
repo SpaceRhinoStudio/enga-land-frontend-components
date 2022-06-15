@@ -5,6 +5,8 @@
 
   let dispatch = createEventDispatcher<{ hover: boolean }>()
 
+  export let noDelay = false
+
   export let hoverState = false
   export let shouldLeave = false
 </script>
@@ -21,12 +23,16 @@
   on:pointerleave={() => {
     if ($canHover$) {
       shouldLeave = true
-      setTimeout(() => {
-        if (shouldLeave) {
-          hoverState = false
-          dispatch('hover', false)
-        }
-      }, config.Delays.min)
+
+      setTimeout(
+        () => {
+          if (shouldLeave) {
+            hoverState = false
+            dispatch('hover', false)
+          }
+        },
+        noDelay ? 0 : config.Delays.min,
+      )
     }
   }}>
   <slot {hoverState} {shouldLeave} />
