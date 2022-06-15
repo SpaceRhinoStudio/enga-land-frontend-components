@@ -53,7 +53,13 @@
   export let sidebarRoutes: Routes[]
 
   export let small = false
-  export let className: { [key in 'headerContainer' | 'headerWrapper']?: string } = {}
+  export let className: {
+    [key in
+      | 'headerContainer'
+      | 'headerWrapper'
+      | 'headerNavDropContainer'
+      | 'headerNavDropItem']?: string
+  } = {}
   export let floatingHeader = false
 
   export let hintDownscaleFactor: { start?: number; end?: number } = { start: 25 }
@@ -87,6 +93,8 @@
         className={{
           container: className.headerContainer,
           wrapper: className.headerWrapper,
+          navDropContainer: className.headerNavDropContainer,
+          navDropItem: className.headerNavDropItem,
         }}
         routes={headerRoutes}
         collapsedRoutes={headerCollapsedRoutes}

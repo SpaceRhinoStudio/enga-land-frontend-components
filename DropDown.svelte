@@ -17,6 +17,7 @@
 
   let shouldLeave = false
   let hoverState: boolean
+  let portalHover: boolean
   let clickState: boolean
   let dismissClick: () => void
 
@@ -52,9 +53,12 @@
 
   let exclude: HTMLElement
 
-  $: !hoverState && (shouldLeave = false)
-  $: isDropped = ((!noHover && hoverState) || clickState) && !shouldLeave && canExpand
+  $: !(hoverState || portalHover) && (shouldLeave = false)
+  $: isDropped =
+    ((!noHover && (hoverState || portalHover)) || clickState) && !shouldLeave && canExpand
 </script>
+
+<svelte:window on:resize={setPos} />
 
 <div
   bind:this={container}
@@ -87,9 +91,11 @@
               className.dropContainer,
               'shadow-xl shadow-[#0008] bg-primary-900 rounded-xl',
             )}>
-            {#if isDropped}
-              <slot name="drop" {dismiss} />
-            {/if}
+            <HoverState bind:hoverState={portalHover}>
+              {#if isDropped}
+                <slot name="drop" {dismiss} />
+              {/if}
+            </HoverState>
           </div>
         {/if}
       </svelte:fragment>

@@ -46,6 +46,7 @@
   target={newTab ? '_blank' : undefined}
   on:click={e => {
     if (disabled) {
+      e.preventDefault()
       return
     }
     dispatch('click', e)

@@ -30,7 +30,9 @@
   let isOpen = false
 
   export let small = false
-  export let className: { [key in 'container' | 'wrapper']?: string | undefined } = {}
+  export let className: {
+    [key in 'container' | 'wrapper' | 'navDropContainer' | 'navDropItem']?: string | undefined
+  } = {}
   const blur = getContext<BackdropStyleContext>(backdropStyle)?.blur
 </script>
 
@@ -77,7 +79,13 @@
     </Link>
     <ul class="grow children:h-full {small ? 'ml-6' : 'ml-12'} h-10 hidden md:flex children:px-3">
       {#each routeConfigs as nav}
-        <DropDown let:isDropped className={{ container: 'flex items-center' }}>
+        <DropDown
+          usePortal
+          let:isDropped
+          className={{
+            container: 'flex items-center',
+            dropContainer: className.navDropContainer ?? '',
+          }}>
           <Link
             href={nav.href}
             disabled={nav.disabled}
@@ -95,15 +103,19 @@
           </Link>
           <div slot="drop">
             {#if nav.subRoutes}
-              <HeaderSubNav routes={nav.subRoutes} />
+              <HeaderSubNav
+                className={{ item: className.navDropItem ?? '' }}
+                routes={nav.subRoutes} />
             {/if}
           </div>
         </DropDown>
       {/each}
       <DropDown
+        usePortal
         let:isDropped
         className={{
           container: 'relative transition-all text-text-primary px-2 cursor-pointer h-full',
+          dropContainer: className.navDropContainer ?? '',
         }}>
         <span
           class={`
@@ -125,7 +137,10 @@
           <div class="delay-100" />
           <div class="delay-200" />
         </span>
-        <HeaderSubNav slot="drop" routes={collapsedRoutes} />
+        <HeaderSubNav
+          className={{ item: className.navDropItem ?? '' }}
+          slot="drop"
+          routes={collapsedRoutes} />
       </DropDown>
     </ul>
     <div class="flex gap-4 items-center">
