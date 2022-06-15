@@ -42,13 +42,24 @@ function mount(node: HTMLElement) {
 
 export function portal(node: HTMLElement, params?: { noop?: boolean }): { destroy: () => void } {
   let destroy: () => void
+  function setDestroy() {
+    try {
+      destroy = mount(node)
+      return true
+    } catch {
+      console.warn('failed to find portal root')
+      return setTimeout(() => {
+        setDestroy()
+      }, 100)
+    }
+  }
   if (!params?.noop) {
     if (!portalRoot) {
       void tick().then(() => {
-        destroy = mount(node)
+        setDestroy()
       })
     } else {
-      destroy = mount(node)
+      setDestroy()
     }
   }
   return { destroy: () => destroy?.() }
