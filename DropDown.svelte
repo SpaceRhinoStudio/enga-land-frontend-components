@@ -31,12 +31,14 @@
   let container: HTMLDivElement
 
   const setPos = () => {
-    const rect = container.getBoundingClientRect()
-    pos = {
-      top: rect.top + container.clientHeight,
-      bottom: rect.top,
-      left: rect.left,
-      right: rect.left + container.clientWidth,
+    const rect = container?.getBoundingClientRect()
+    if (rect) {
+      pos = {
+        top: rect.top + container.clientHeight,
+        bottom: rect.top,
+        left: rect.left,
+        right: rect.left + container.clientWidth,
+      }
     }
   }
 
