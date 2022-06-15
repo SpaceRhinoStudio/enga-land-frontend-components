@@ -5,8 +5,11 @@ export function rndElm<T>(arr: T[]): T {
   return arr[rnd(arr.length)]!
 }
 
-export function rnd(max: number, min = 0): number {
-  const res = Math.floor(Math.random() * (max - min) + min)
+export function rnd(max: number, min = 0, canBeFloat = false): number {
+  if (min > max) {
+    ;[min, max] = [max, min]
+  }
+  const res = (canBeFloat ? (e: number) => e : Math.floor)(Math.random() * (max - min) + min)
   return res === max ? max - 1 : res
 }
 
