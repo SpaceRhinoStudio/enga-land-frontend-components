@@ -1,15 +1,16 @@
 <script lang="ts">
   import cn from 'classnames'
-  import { fade } from 'svelte/transition'
+  import { fade, FadeParams } from 'svelte/transition'
   export let className: { [key in 'class' | 'position']?: string } = {}
   export let style = ''
+  export let fadeParams: FadeParams = {}
 </script>
 
 <span
-  transition:fade
+  transition:fade={fadeParams}
   {style}
   class={cn(
-    'h-7',
+    // 'h-7',
     'w-max',
     'flex items-center',
     'absolute',
