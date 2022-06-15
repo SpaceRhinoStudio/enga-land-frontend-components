@@ -24,18 +24,21 @@
   import BodyScrollHint from './BodyScrollHint.svelte'
   import { create_fixed_root } from './actions/fixed'
   import { create_backdrop_root } from './actions/backdrop'
-  import { Readable } from 'svelte/store'
+  import { derived, Readable } from 'svelte/store'
 
   let isLoading: boolean
 
   const blurMultiplier = 20
 
-  const [blur, setBlur] = useWobble({
+  const [_blur, setBlur] = useWobble({
     fromValue: blurMultiplier,
     stiffness: 10,
     damping: 1000,
     mass: 0.2,
   })
+  const blur = derived(_blur, val =>
+    blurMultiplier - val < 1 ? blurMultiplier : val < 1 ? 0 : val,
+  )
   $: setBlur($portalMap.some(x => x.index !== null) || isLoading ? blurMultiplier : 0)
 
   setContext<BackdropStyleContext>(backdropStyle, {
