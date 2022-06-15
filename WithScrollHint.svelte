@@ -5,8 +5,12 @@
   import { resize_observer } from './actions/resize-observer'
   import type { Bounds } from './types'
   import { canHover$ } from './helpers/media-queries'
+  import { fade } from 'svelte/transition'
+  import cn from 'classnames'
 
-  export let className: { [key in 'wrapper' | 'innerWrapper' | 'container' | 'hint']?: string } = {}
+  export let className: {
+    [key in 'wrapper' | 'innerWrapper' | 'container' | 'hint' | 'button']?: string
+  } = {}
 
   export let goToTopButton: boolean = false
   export let hideThreshold: number = 40
@@ -46,24 +50,23 @@
     paddingY: 0,
   }
 
-  let scroll = { top: 0, left: 0 }
+  export let scroll = { top: 0, left: 0 }
 </script>
 
 <div class="relative overflow-hidden {className.container}">
   <div
-    class={`
-        max-h-full
-        overflow-auto
-        ${
-          horizontalScrollButtons &&
-          $canHover$ &&
-          outerBounds.width < outerBounds.scrollWidth &&
-          'snap-x snap-mandatory snap-always scrollbar-hide'
-        }
-        ${mode === 'vertical' && 'overflow-x-hidden'}
-        ${mode === 'horizontal' && 'overflow-y-hidden'}
-        ${className.wrapper}
-    `}
+    class={cn(
+      outerBounds.height < innerBounds.height && 'overscroll-contain',
+      'max-h-full',
+      horizontalScrollButtons &&
+        $canHover$ &&
+        outerBounds.width < outerBounds.scrollWidth &&
+        'snap-x snap-mandatory snap-always scrollbar-hide',
+      mode === 'vertical' && 'overflow-x-hidden',
+      mode === 'horizontal' && 'overflow-y-hidden',
+      mode === 'both' && 'overflow-auto',
+      className.wrapper,
+    )}
     use:resize_observer
     on:resize={e => (outerBounds = e.detail)}
     bind:this={outerRef}
@@ -78,14 +81,13 @@
       use:resize_observer
       on:resize={e => (innerBounds = e.detail)}
       data-name="inner"
-      class={`
-            ${className?.innerWrapper}
-            ${
-              horizontalScrollButtons && $canHover$ && outerBounds.width < outerBounds.scrollWidth
-                ? 'children:snap-start children:scroll-m-10'
-                : ''
-            },
-        `}>
+      class={cn(
+        className?.innerWrapper,
+        horizontalScrollButtons &&
+          $canHover$ &&
+          outerBounds.width < outerBounds.scrollWidth &&
+          'children:snap-start children:scroll-m-10',
+      )}>
       <slot />
     </div>
   </div>
@@ -94,10 +96,10 @@
   {#if mode !== 'horizontal'}
     <div
       data-name="top-hint"
-      class="absolute -top-px left-0 right-0 bg-gradient-to-b to-transparent pointer-events-none select-none -translate-y-px {className?.hint ??
+      class="will-change-[opacity] absolute -top-px left-0 right-0 bg-gradient-to-b to-transparent pointer-events-none select-none -translate-y-px {className?.hint ??
         'from-primary-990'}"
       style="height: {(outerBounds.height + outerBounds.paddingY) /
-        (hintDownscaleFactor.start ?? 1)}px; opacity: {Math.min(scroll.top ?? 0, hideThreshold) /
+        (hintDownscaleFactor.start ?? 1)}px; opacity: {Math.min(scroll.top, hideThreshold) /
         hideThreshold};" />
   {/if}
 
@@ -105,11 +107,11 @@
   {#if mode !== 'horizontal'}
     <div
       data-name="bottom-hint"
-      class="absolute -bottom-px left-0 right-0 bg-gradient-to-t to-transparent pointer-events-none select-none {className?.hint ??
+      class="will-change-[opacity] absolute -bottom-px left-0 right-0 bg-gradient-to-t to-transparent pointer-events-none select-none {className?.hint ??
         'from-primary-990'}"
       style="height: {(outerBounds.height + outerBounds.paddingY) /
         (hintDownscaleFactor.end ?? 1)}px; opacity: {Math.min(
-        innerBounds.height - ((scroll.top ?? 0) + outerBounds.height),
+        innerBounds.height - (scroll.top + outerBounds.height),
         hideThreshold,
       ) / hideThreshold}" />
   {/if}
@@ -118,10 +120,10 @@
   {#if mode !== 'vertical'}
     <div
       data-name="left-hint"
-      class="absolute -left-px top-0 bottom-0 bg-gradient-to-r to-transparent pointer-events-none select-none {className?.hint ??
+      class="will-change-[opacity] absolute -left-px top-0 bottom-0 bg-gradient-to-r to-transparent pointer-events-none select-none {className?.hint ??
         'from-primary-990'}"
       style="width: {(outerBounds.width + outerBounds.paddingX) /
-        (hintDownscaleFactor.start ?? 1)}px; opacity: {Math.min(scroll.left ?? 0, hideThreshold) /
+        (hintDownscaleFactor.start ?? 1)}px; opacity: {Math.min(scroll.left, hideThreshold) /
         hideThreshold};" />
   {/if}
 
@@ -129,38 +131,38 @@
   {#if mode !== 'vertical'}
     <div
       data-name="right-hint"
-      class="absolute -right-px top-0 bottom-0 bg-gradient-to-l to-transparent pointer-events-none select-none {className?.hint ??
+      class="will-change-[opacity] absolute -right-px top-0 bottom-0 bg-gradient-to-l to-transparent pointer-events-none select-none {className?.hint ??
         'from-primary-990'}"
       style="width: {(outerBounds.width + outerBounds.paddingX) /
         (hintDownscaleFactor.end ?? 1)}px; opacity: {Math.min(
-        innerBounds.scrollWidth - ((scroll.left ?? 0) + outerBounds.width),
+        innerBounds.scrollWidth - (scroll.left + outerBounds.width),
         hideThreshold,
       ) / hideThreshold};" />
   {/if}
 
   {#if goToTopButton}
     <!-- goToTopButton -->
-    <div
-      class="bg-primary-900 rounded-full h-10 w-10 absolute right-4 bottom-4 shadow-lg shadow-primary-990 z-[11] cursor-pointer flex justify-center items-center transition-opacity"
-      style="opacity: {Math.floor(
-        (Math.min(scroll.top ?? 0, hideThreshold * 10) / (hideThreshold * 10)) * 2,
-      )};"
-      on:click={() => outerRef?.scroll({ behavior: 'smooth', top: 0 })}>
-      <SvgIcon Icon={ScrollTopIcon} width="1.5rem" height="1.5rem" />
-    </div>
+    {#if scroll.top > hideThreshold * 2.5}
+      <div
+        transition:fade
+        class="bg-primary-900 rounded-full h-10 w-10 absolute right-4 bottom-4 shadow-lg shadow-primary-990 z-[11] cursor-pointer flex justify-center items-center transition-opacity {className.button}"
+        on:click={() => outerRef?.scroll({ behavior: 'smooth', top: 0 })}>
+        <SvgIcon Icon={ScrollTopIcon} width="1.5rem" height="1.5rem" />
+      </div>
+    {/if}
   {/if}
   {#if horizontalScrollButtons && $canHover$ && outerBounds.width < outerBounds.scrollWidth}
     <!-- scrollRightButton -->
     <div
       class="bg-primary-990 rounded-full h-8 w-8 absolute right-1.5 top-1/2 -translate-y-1/2 z-[11] cursor-pointer flex justify-center items-center transition-opacity"
       style="opacity: {Math.min(
-        innerBounds.scrollWidth - ((scroll.left ?? 0) + outerBounds.width),
+        innerBounds.scrollWidth - (scroll.left + outerBounds.width),
         hideThreshold,
       ) / hideThreshold};"
       on:click={() =>
         outerRef?.scroll({
           behavior: 'smooth',
-          left: (scroll.left ?? 0) + outerBounds.width / 2,
+          left: scroll.left + outerBounds.width / 2,
         })}>
       <SvgIcon Icon={ScrollTopIcon} width="1.3rem" height="1.3rem" className="rotate-90" />
     </div>
@@ -168,11 +170,11 @@
     <!-- scrollLeftButton -->
     <div
       class="bg-primary-990 rounded-full h-8 w-8 absolute left-1.5 top-1/2 -translate-y-1/2 z-[11] cursor-pointer flex justify-center items-center transition-opacity"
-      style="opacity: {Math.min(scroll.left ?? 0, hideThreshold) / hideThreshold};"
+      style="opacity: {Math.min(scroll.left, hideThreshold) / hideThreshold};"
       on:click={() =>
         outerRef?.scroll({
           behavior: 'smooth',
-          left: (scroll.left ?? 0) - outerBounds.width / 2,
+          left: scroll.left - outerBounds.width / 2,
         })}>
       <SvgIcon Icon={ScrollTopIcon} width="1.3rem" height="1.3rem" className="-rotate-90" />
     </div>
