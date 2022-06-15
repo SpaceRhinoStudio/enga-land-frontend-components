@@ -1,5 +1,9 @@
 <script context="module" lang="ts">
   export const intro = true
+  export const backdropStyle = Symbol()
+  export type BackdropStyleContext = {
+    blur: Readable<number>
+  }
 </script>
 
 <script lang="ts">
@@ -8,28 +12,35 @@
   import MobileHoverFix from './helpers/mobile-hover-fix.svelte'
   import MainLoadingOverlay from './MainLoadingOverlay.svelte'
   import IsNavigating from './IsNavigating.svelte'
-  import { type TransitionConfig } from 'svelte/transition'
   import { portalMap, create_portal_root } from './actions/portal'
   import _ from 'lodash'
-  import { onMount } from 'svelte'
+  import { onMount, setContext } from 'svelte'
   import Footer from './Footer.svelte'
-  import WithScrollHint from './WithScrollHint.svelte'
   import { useWobble } from './helpers/wobble-svelte'
   import EngaLogo from './assets/favicon.png'
   import cn from 'classnames'
   import HeaderLayout from './HeaderLayout.svelte'
   import { Routes } from './configs/routes'
+  import BodyScrollHint from './BodyScrollHint.svelte'
+  import { create_fixed_root } from './actions/fixed'
+  import { create_backdrop_root } from './actions/backdrop'
+  import { Readable } from 'svelte/store'
 
-  const [shouldBlur, setShouldBlur] = useWobble({})
-  $: setShouldBlur($portalMap.every(x => x.index === null) || $portalMap.length === 0 ? 0 : 1)
+  let isLoading: boolean
 
-  function fadeAndBlur(node: HTMLElement, { delay = 0, duration = 500 }): TransitionConfig {
-    return {
-      delay,
-      duration,
-      css: t => `filter: blur(${(1 - t) * 20}px); opacity: ${t};`,
-    }
-  }
+  const blurMultiplier = 20
+
+  const [blur, setBlur] = useWobble({
+    fromValue: blurMultiplier,
+    stiffness: 10,
+    damping: 1000,
+    mass: 0.2,
+  })
+  $: setBlur($portalMap.some(x => x.index !== null) || isLoading ? blurMultiplier : 0)
+
+  setContext<BackdropStyleContext>(backdropStyle, {
+    blur,
+  })
 
   let isReady = false
   onMount(() => (isReady = true))
@@ -43,6 +54,9 @@
 
   export let small = false
   export let className: { [key in 'headerContainer' | 'headerWrapper']?: string } = {}
+  export let floatingHeader = false
+
+  export let hintDownscaleFactor: { start?: number; end?: number } = { start: 25 }
 </script>
 
 <svelte:head>
@@ -53,56 +67,53 @@
 <MobileVhFix />
 <MainLoadingOverlay />
 
-<div id="portal_root" use:create_portal_root />
-
+<IsNavigating bind:isLoading />
 {#if isReady}
-  <div in:fadeAndBlur={{ duration: 1200 }}>
-    <IsNavigating>
-      <div
-        slot="hide"
-        id="app"
-        transition:fadeAndBlur
-        style={$shouldBlur === 0 ? '' : `filter: blur(${$shouldBlur * 20}px);`}
-        class="w-screen relative">
-        <HeaderLayout
-          className={{
-            container: className.headerContainer,
-            wrapper: className.headerWrapper,
-          }}
-          routes={headerRoutes}
-          collapsedRoutes={headerCollapsedRoutes}
-          {sidebarRoutes}
-          {small}>
-          <slot name="header-right" slot="right" />
-          <slot name="sidebar-foot" slot="sidebar-foot" />
-        </HeaderLayout>
-
-        <WithScrollHint
-          goToTopButton
-          hintDownscaleFactor={{ start: 25 }}
-          mode="vertical"
-          className={{
-            container:
-              'w-full h-[calc(100vh-theme(spacing.24))] md:h-[calc(100vh-theme(spacing.28))] mt-24 md:mt-28',
-            innerWrapper:
-              'min-h-[calc(100vh-theme(spacing.24))] md:min-h-[calc(100vh-theme(spacing.28))] flex flex-col',
-          }}>
-          <main
-            style="padding-bottom: calc({footerHeight}px + 1.25rem);"
-            class={cn(
-              small
-                ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
-                : 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.xl))]',
-              'relative w-screen children:max-w-full mx-auto py-5 grow flex flex-col',
-            )}>
-            <slot />
-            <Footer routes={footerRoutes} bind:clientHeight={footerHeight} {small}>
-              <slot name="footer-foot" slot="foot" />
-              <slot name="footer-metadata" slot="metadata" />
-            </Footer>
-          </main>
-        </WithScrollHint>
-      </div>
-    </IsNavigating>
+  <div
+    id="app"
+    class="w-screen relative z-0"
+    style={$blur === 0 ? '' : `filter: blur(${$blur}px);`}>
+    <main
+      style="padding-bottom: calc({footerHeight}px + 1.25rem);"
+      class={cn(
+        'min-h-[calc(100vh-theme(spacing.24))] md:min-h-[calc(100vh-theme(spacing.28))]',
+        !floatingHeader && 'mt-24 md:mt-28',
+        small
+          ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
+          : 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.xl))]',
+        'relative z-0 w-screen children:max-w-full mx-auto py-5 grow flex flex-col overflow-y-clip',
+      )}>
+      <HeaderLayout
+        className={{
+          container: className.headerContainer,
+          wrapper: className.headerWrapper,
+        }}
+        routes={headerRoutes}
+        collapsedRoutes={headerCollapsedRoutes}
+        {sidebarRoutes}
+        {small}>
+        <slot name="header-right" slot="right" />
+        <slot name="sidebar-foot" slot="sidebar-foot" />
+      </HeaderLayout>
+      <slot />
+      <Footer routes={footerRoutes} bind:clientHeight={footerHeight} {small}>
+        <slot name="footer-foot" slot="foot" />
+        <slot name="footer-metadata" slot="metadata" />
+      </Footer>
+      <BodyScrollHint {hintDownscaleFactor} />
+    </main>
+  </div>
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div
+      data-name="backdrop-root"
+      use:create_backdrop_root
+      class="children:pointer-events-auto absolute z-0 inset-0" />
+    <div
+      data-name="fixed-root"
+      use:create_fixed_root
+      class="children:pointer-events-auto absolute z-0 inset-0"
+      style={$blur === 0 ? '' : `filter: blur(${$blur}px);`} />
   </div>
 {/if}
+
+<div id="portal_root" use:create_portal_root />
