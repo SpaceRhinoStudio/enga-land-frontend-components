@@ -28,6 +28,8 @@
   const [shouldBlur, setShouldBlur] = useWobble({})
   $: node && setShouldBlur($portalMap.some(x => (x.index ?? -1) > (index ?? -1)) ? 1 : 0)
 
+  $: isOpen ? (document.body.style.overflowY = 'hidden') : (document.body.style.overflowY = 'auto')
+
   $: index = changePortalVisibility(node, isOpen)
 </script>
 
@@ -36,27 +38,37 @@
     <div
       transition:fade
       tabindex="0"
-      on:keydown={e => e.key === 'Escape' && dismiss()}
       style="z-index: {(index ?? -100) + 50}; {$shouldBlur === 0
         ? ''
         : `filter: blur(${$shouldBlur * 20}px); `}"
-      class={`
-        fixed inset-0
-        bg-black bg-opacity-40
-        flex flex-col items-center justify-end sm:justify-center
-        overflow-hidden
-        #sm:overflow-y-auto
-        overscroll-none
-        ${className.bg}
-      `}
+      class={cn(
+        'overscroll-none touch-none',
+        'overscroll-contain-children',
+        'fixed inset-0',
+        'bg-black bg-opacity-40',
+        'overflow-hidden',
+        className.bg,
+      )}
+      on:keydown={e => e.key === 'Escape' && dismiss()}
       on:click|self={dismiss}>
       {#if isOpen}
         <div
+          on:keydown={e => e.key === 'Escape' && dismiss()}
+          on:click|self={dismiss}
           transition:fly={{ ...(animateWidth ? { x: -500 } : { y: 500 }), duration: 500 }}
-          class={cn(!neverFullWidth && 'w-full sm:w-max')}>
+          class={cn(
+            neverFullWidth ? 'w-max' : 'w-full',
+            'h-full flex flex-col items-center justify-end sm:justify-center',
+          )}>
           <slot {isOpen} />
         </div>
       {/if}
     </div>
   {/if}
 </div>
+
+<style lang="postcss">
+  .overscroll-contain-children :global(*) {
+    overscroll-behavior: contain;
+  }
+</style>
