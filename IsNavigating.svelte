@@ -5,11 +5,14 @@
 <script lang="ts">
   import { afterNavigate, beforeNavigate, goto } from '$app/navigation'
   import { onMount } from 'svelte'
+  import { isPageLoading$ } from './observables/is-page-loading'
 
   export let isLoading = true
   export let isNavigating = true
   let isReady = false
   let whitelist = { to: null as string | null }
+
+  $: isLoading = isNavigating || !isReady || $isPageLoading$
 
   beforeNavigate(({ to, cancel }) => {
     if (!whitelist.to && to?.pathname) {
@@ -20,21 +23,17 @@
       }, 350)
     }
     isNavigating = true
-    isLoading = isNavigating || !isReady
   })
 
   afterNavigate(() => {
     setTimeout(() => {
       isNavigating = false
-      isLoading = isNavigating || !isReady
     }, 350)
   })
   onMount(() => {
     isReady = true
-    isLoading = isNavigating || !isReady
     setTimeout(() => {
       isNavigating = false
-      isLoading = isNavigating || !isReady
     }, 350)
   })
 </script>
@@ -49,4 +48,6 @@
   {/if}
 
   <slot name="inform" {isLoading} />
+
+  <slot />
 {/if}
