@@ -10,7 +10,7 @@
   export const dismiss = () => {
     clickState = false
   }
-  export let toggle = true
+  export let noToggle = false
 </script>
 
 <svelte:window
@@ -31,7 +31,7 @@
       (exclude ?? _exclude ? !(exclude ?? _exclude).contains(e.target) : true)
     ) {
       dispatch('click', e)
-      if (toggle) {
+      if (!noToggle) {
         clickState = !clickState
       } else {
         clickState = true
