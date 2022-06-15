@@ -74,18 +74,25 @@ export type RouteConfig = {
   preview?: boolean
 }
 
+const isLanding = import.meta.env.VITE_IS_LANDING === 'true'
+
+const href = {
+  dapp: (href: string) => (isLanding ? 'https://app.enga.land' : '') + href,
+  landing: (href: string) => (isLanding ? '' : 'https://enga.land') + href,
+}
+
 export const routeConfig: {
   [key in Routes]: RouteConfig
 } = {
   [Routes.home]: {
     id: Routes.home,
-    href: 'https://enga.land/',
+    href: href.landing('/'),
     icon: HomeIcon,
     disabled: false,
   },
   [Routes.dapp]: {
     id: Routes.dapp,
-    href: '/',
+    href: href.dapp('/'),
     icon: DappIcon,
     disabled: false,
     subRoutes: [
@@ -99,14 +106,14 @@ export const routeConfig: {
   },
   [Routes.marketplace]: {
     id: Routes.marketplace,
-    href: '/marketplace',
+    href: href.dapp('/marketplace'),
     icon: MarketPlaceIcon,
     disabled: true,
     preview: true,
   },
   [Routes.help]: {
     id: Routes.help,
-    href: 'https://enga.land/help',
+    href: href.landing('/help'),
     icon: HelpIcon,
     disabled: true,
   },
@@ -118,39 +125,39 @@ export const routeConfig: {
   },
   [Routes.dashboard]: {
     id: Routes.dashboard,
-    href: '/dashboard',
+    href: href.dapp('/dashboard'),
     icon: DashboardIcon,
     disabled: true,
     preview: true,
   },
   [Routes.staking]: {
     id: Routes.staking,
-    href: '/staking',
+    href: href.dapp('/staking'),
     icon: StakingIcon,
     disabled: true,
     preview: true,
   },
   [Routes.exchange]: {
     id: Routes.exchange,
-    href: '/swap',
+    href: href.dapp('/swap'),
     icon: ExchangeIcon,
     disabled: false,
   },
   [Routes.dao]: {
     id: Routes.dao,
-    href: '/dao',
+    href: href.dapp('/dao'),
     icon: DaoIcon,
     disabled: true,
   },
   [Routes.auction]: {
     id: Routes.auction,
-    href: '/auction',
+    href: href.dapp('/auction'),
     icon: AuctionIcon,
     disabled: true,
   },
   [Routes.tickets]: {
     id: Routes.tickets,
-    href: '/tickets',
+    href: href.dapp('/tickets'),
     icon: TicketsIcon,
     disabled: true,
   },
@@ -204,84 +211,84 @@ export const routeConfig: {
   },
   [Routes.mpEndro]: {
     id: Routes.mpEndro,
-    href: '/marketplace/endro',
+    href: href.dapp('/marketplace/endro'),
     icon: MPEndroIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpOpifexOff]: {
     id: Routes.mpOpifexOff,
-    href: '/marketplace/opifexOff',
+    href: href.dapp('/marketplace/opifexOff'),
     icon: MPOpifexOffIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpOpifexIndexed]: {
     id: Routes.mpOpifexIndexed,
-    href: '/marketplace/opifexIndexed',
+    href: href.dapp('/marketplace/opifexIndexed'),
     icon: MPOpifexIndexedIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpCosmetics]: {
     id: Routes.mpCosmetics,
-    href: '/marketplace/cosmetics',
+    href: href.dapp('/marketplace/cosmetics'),
     icon: MPCosmeticsIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpChipset]: {
     id: Routes.mpChipset,
-    href: '/marketplace/chipset',
+    href: href.dapp('/marketplace/chipset'),
     icon: MPChipsetIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpConsumable]: {
     id: Routes.mpConsumable,
-    href: '/marketplace/consumable',
+    href: href.dapp('/marketplace/consumable'),
     icon: MPConsumableIcon,
     disabled: true,
     preview: true,
   },
   [Routes.mpAccoutrements]: {
     id: Routes.mpAccoutrements,
-    href: '/marketplace/accoutrements',
+    href: href.dapp('/marketplace/accoutrements'),
     icon: MPAccoutrementsIcon,
     disabled: true,
     preview: true,
   },
   [Routes.mpSkins]: {
     id: Routes.mpSkins,
-    href: '/marketplace/skins',
+    href: href.dapp('/marketplace/skins'),
     icon: MPSkinsIcon,
     disabled: true,
     preview: true,
   },
   [Routes.mpTickets]: {
     id: Routes.mpTickets,
-    href: '/marketplace/tickets',
+    href: href.dapp('/marketplace/tickets'),
     icon: MPTicketsIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpListings]: {
     id: Routes.mpListings,
-    href: '/marketplace/listings',
+    href: href.dapp('/marketplace/listings'),
     icon: MPListingsIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpSales]: {
     id: Routes.mpSales,
-    href: '/marketplace/sales',
+    href: href.dapp('/marketplace/sales'),
     icon: MPSalesIcon,
     disabled: false,
     preview: true,
   },
   [Routes.mpPurchases]: {
     id: Routes.mpPurchases,
-    href: '/marketplace/purchases',
+    href: href.dapp('/marketplace/purchases'),
     icon: MPPurchasesIcon,
     disabled: false,
     preview: true,
