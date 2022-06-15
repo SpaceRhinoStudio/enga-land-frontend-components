@@ -21,6 +21,48 @@ export interface WebsiteLocaleData {
     notAvailable: string
     loadMore: string
   }
+  landing: {
+    header: {
+      launchDapp: string
+    }
+    hero: {
+      title: string
+      subtitle: string
+    }
+    teaser: {
+      title: string
+      subtitle: string
+    }
+    realms: {
+      title: string
+      info: {
+        [key in Realms]: {
+          description: string
+          xp: string
+          zealDefect: string
+          meritPoints: string
+          subtitle: string
+        }
+      }
+    }
+    features: {
+      title: string
+      items: {
+        title: string
+        description: string
+      }[]
+    }
+    roadmap: {
+      title: string
+      items: {
+        title: string
+        items: [string, boolean][]
+      }[]
+    }
+    technologies: {
+      title: string
+    }
+  }
   header: {
     connectWallet: string
   }
@@ -132,6 +174,7 @@ export interface WebsiteLocaleData {
     itsYou: string
   }
   EngaVerse: {
+    engaland: string
     godStats: {
       [key in GodStats]: string
     }

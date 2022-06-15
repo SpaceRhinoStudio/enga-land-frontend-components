@@ -21,6 +21,144 @@ const locale: WebsiteLocale = new WebsiteLocale({
     notAvailable: 'N/A',
     loadMore: 'Load More',
   },
+  landing: {
+    header: {
+      launchDapp: 'LAUNCH APP',
+    },
+    hero: {
+      title: 'Power up your Endro, customize them with NFTs, and fight for glory!',
+      subtitle:
+        'Embark on a journey on the treacherous realms of Engaland, the land of endless possibilities and threats.',
+    },
+    teaser: {
+      title: 'KNOW ABOUT ENGALAND',
+      subtitle:
+        'An unknown and mysterious planet, attempts were made to pacify and colonize her by each of the five realms throughout their histories, all failed drastically, no one knew why, until now...',
+    },
+    realms: {
+      title: 'REALMS',
+      info: {
+        [Realms.sigr]: {
+          description:
+            'The red planet, Sigr, is ruled over by an aggressive and ruthless empire. Sigrmen and Sigrwomen are known for their extreme resilience and strategized army.',
+          subtitle: 'History is written by us.',
+          xp: '8.0%',
+          zealDefect: '2.0%',
+          meritPoints: '1 per 10 levels',
+        },
+        [Realms.magesta]: {
+          description:
+            'Magestans are a people of hedonistic lifestyle and decadence. Since the inclusion of the purple planet into the Enga Federation, Magesta has enjoyed a continuous stream of prosperity and wealth.',
+          subtitle: 'The beginnings of all things are small.',
+          xp: '2.5%',
+          zealDefect: '2.5%',
+          meritPoints: '2 per 5 levels',
+        },
+        [Realms.nubia]: {
+          description:
+            'Located in a dark corner of the Engaverse, the orange planet of Nubia is home to a highly advanced and mysterious civilization. The Nubians are intelligent merchants and have established friendly relations with other civilizations around the galaxy.',
+          subtitle: 'Tomorrow is another day.',
+          xp: '3.5%',
+          zealDefect: '3.0%',
+          meritPoints: '2 per 10 levels',
+        },
+        [Realms.ufm]: {
+          description:
+            'United Federations of Man started as a peace treaty between multiple nations on their blue planet. They decided to put an end to all wars and countless losses, and to start building a strong and peaceful nation that shines in glory and technology.',
+          subtitle: 'UFM strongly believes in friends and foes!',
+          xp: '1.0%',
+          zealDefect: '6.0%',
+          meritPoints: '2 per 9 levels',
+        },
+        [Realms.komorebi]: {
+          description:
+            "Komorebi's isolationist and tyrant emperor, rumored to be immortal, mysteriously disappeared one day. A regency council was established to oversee the empire. Since the regency, Komorebi has opened its doors to the outside world.",
+          subtitle: 'The future is bright.',
+          xp: '2.0%',
+          zealDefect: '4.0%',
+          meritPoints: '1 per 2 levels',
+        },
+      },
+    },
+    features: {
+      title: 'FEATURES',
+      items: [
+        {
+          title: 'NFT & DeFi',
+          description:
+            'Utilizing NFTs lets users be the true owners of their assets. Combined with DeFi, users can earn rewards for their contributions.',
+        },
+        {
+          title: 'What is DAO',
+          description:
+            'DAO is a decentralized autonomous organization, where users are in control. Enga Federation is the DAO that rules over the Engaverse, and determines its future.',
+        },
+      ],
+    },
+    roadmap: {
+      title: 'ROADMAP',
+      items: [
+        {
+          title: 'ICO (Q3 2022)',
+          items: [
+            ['Seed sale', false],
+            ['Private sale', false],
+            ['Marketing campaign', false],
+            ['Public sale', false],
+            ['Dapp launch', true],
+            ['DAO launch', false],
+            ['Token listings on CoinMarketCap & CoinGecko', false],
+          ],
+        },
+        {
+          title: 'MARKETPLACE (Q3-Q4 2022)',
+          items: [
+            ['Endro NFTs', false],
+            ['Endro wearables', false],
+            ['Consumable NFTs', false],
+            ['Rarity farming', false],
+            ['Marketing campaign', false],
+            ['Auction house/marketplace', false],
+            ['Enga game teaser', false],
+          ],
+        },
+        {
+          title: 'THE REVEAL (Q1 2023-Q2 2023)',
+          items: [
+            ['Providing liquidity for DEX', false],
+            ['GameDev team incubation', false],
+            ['Engaland game', false],
+            ['Game server', false],
+            ['Enga game beta release', false],
+            ['Marketing campaign & twitter trend', false],
+          ],
+        },
+        {
+          title: 'MASS ADOPTION (Q3 2023)',
+          items: [
+            ['First accoutrement drop', false],
+            ['Endro skins', false],
+            ['CEX listing', false],
+            ['Marketing campaign & twitter trend', false],
+            ['Game mechanics rebalancing', false],
+            ['Lands & lending', false],
+          ],
+        },
+        {
+          title: 'FUTURE (Q4 2023 and beyond)',
+          items: [
+            ['Decentralized gaming blockchain', false],
+            ['ERC20, ERC721 & ERC1155 token bridge', false],
+            ['Blockchain communication SDK', false],
+            ['GameFi marketplace', false],
+          ],
+        },
+      ],
+    },
+    technologies: {
+      title: 'TECHNOLOGIES',
+    },
+  },
   header: { connectWallet: 'CONNECT WALLET' },
   nav: {
     [Routes.home]: 'Home',
@@ -176,6 +314,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
     itsYou: 'You',
   },
   EngaVerse: {
+    engaland: 'Engaland',
     godStats: {
       [GodStats.str]: 'Strength',
       [GodStats.dex]: 'Dexterity',
