@@ -18,8 +18,7 @@
   href={item.href}
   on:click={() => onRouteChange()}
   disabled={item.disabled}
-  element="div"
-  className={{ element: `relative text-lg py-3 transition-all ${className}` }}>
+  className={{ element: `block relative text-lg py-3 transition-all ${className}` }}>
   {#if match}
     <div
       class={`
