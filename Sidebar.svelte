@@ -17,7 +17,7 @@
 
 <Modal animateWidth neverFullWidth className={{ bg: '!items-start' }} acceptExit bind:isOpen>
   <nav
-    class="flex flex-col bg-primary-990 h-[var(--h-screen)] top-0 left-0 z-40 overflow-y-auto max-w-xs w-screen px-6">
+    class="flex flex-col h-full bg-primary-990 top-0 left-0 z-40 overflow-y-auto max-w-xs w-screen px-6">
     <div class="space-y-7 sticky top-0 z-10">
       <div class="flex justify-between items-center pt-8">
         <div on:click={() => goto('/')}>
