@@ -2,7 +2,16 @@ import { config } from '../configs'
 import { Window$ } from '../observables/window'
 import type { Screens } from '../types'
 import _ from 'lodash'
-import { combineLatest, fromEvent, map, Observable, startWith, switchMap } from 'rxjs'
+import {
+  combineLatest,
+  distinctUntilChanged,
+  fromEvent,
+  map,
+  Observable,
+  shareReplay,
+  startWith,
+  switchMap,
+} from 'rxjs'
 import { exclusiveOf$ } from './px-rem-conversion'
 
 export function matchMedia$(query: string): Observable<boolean> {
@@ -55,4 +64,6 @@ export const screen$: Observable<{
     isTablet: x === 'md',
     isDesktop: x === 'lg',
   })),
+  distinctUntilChanged(_.isEqual),
+  shareReplay(1),
 )
