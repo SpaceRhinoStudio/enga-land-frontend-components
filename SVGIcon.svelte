@@ -4,6 +4,7 @@
   import { draw } from 'svelte/transition' //TODO
 
   export let className: string = ''
+  export let style: string = ''
   export let Icon: any
   export let width: string | undefined
   export let height: string | undefined
@@ -16,7 +17,7 @@
   export let dontFill = false
 </script>
 
-<div class={`flex items-center justify-center ${className}`}>
+<div class={`flex items-center justify-center ${className}`} {style}>
   <svelte:component
     this={Icon}
     width={pxWidth}
