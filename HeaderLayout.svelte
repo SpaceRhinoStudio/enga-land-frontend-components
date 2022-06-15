@@ -14,6 +14,9 @@
   import { page } from '$app/stores'
   import _ from 'lodash'
   import cn from 'classnames'
+  import { backdrop } from './actions/backdrop'
+  import { getContext } from 'svelte'
+  import { backdropStyle, BackdropStyleContext } from './MainLayout.svelte'
 
   let isPreview = false
   $: isPreview =
@@ -28,14 +31,17 @@
 
   export let small = false
   export let className: { [key in 'container' | 'wrapper']?: string | undefined } = {}
+  const blur = getContext<BackdropStyleContext>(backdropStyle)?.blur
 </script>
 
 <header
+  use:backdrop
   class={cn(
     'h-24 md:h-28 fixed top-0 left-0 right-0 z-40 flex items-center',
     className.container ?? 'bg-primary-800 shadow-float',
   )}>
   <nav
+    style={$blur === 0 ? '' : `filter: blur(${$blur}px);`}
     class={cn(
       small
         ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
@@ -69,7 +75,7 @@
         {/if}
       </div>
     </Link>
-    <ul class="grow children:h-full ml-12 h-10 hidden md:flex children:px-3">
+    <ul class="grow children:h-full {small ? 'ml-6' : 'ml-12'} h-10 hidden md:flex children:px-3">
       {#each routeConfigs as nav}
         <DropDown let:isDropped className={{ container: 'flex items-center' }}>
           <Link
