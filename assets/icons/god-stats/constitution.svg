@@ -1,32 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="129.362" height="129.362"
-  viewBox="10 10 109.362 109.362">
-  <defs>
-    <linearGradient id="linear-gradient-con" x1="1.163" y1="-1.937" x2="2.012" y2="-1.087"
-      gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#58595b" />
-      <stop offset="0.199" stop-color="#454546" />
-      <stop offset="0.479" stop-color="#323031" />
-      <stop offset="0.75" stop-color="#262324" />
-      <stop offset="1" stop-color="#231f20" />
-    </linearGradient>
-  </defs>
-  <g id="constitution" transform="translate(-22.779 -267.043)">
-    <g id="Group_452" data-name="Group 452">
-      <g id="Group_450" data-name="Group 450">
-        <rect id="Rectangle_3168" data-name="Rectangle 3168" width="91.472" height="91.472" rx="23.573"
-          transform="translate(22.779 331.723) rotate(-45)" fill="url(#linear-gradient-con)" />
-      </g>
-      <g id="Group_451" data-name="Group 451">
-        <path id="Path_2817" data-name="Path 2817"
-          d="M87.46,380.89a19.431,19.431,0,0,1-13.781-5.7L43.728,345.239a19.511,19.511,0,0,1,0-27.56l29.951-29.951a19.51,19.51,0,0,1,27.561,0l29.951,29.951a19.509,19.509,0,0,1,0,27.56L101.24,375.191A19.427,19.427,0,0,1,87.46,380.89Zm-12.285-7.2a17.4,17.4,0,0,0,24.57,0L129.7,343.744a17.393,17.393,0,0,0,0-24.57L99.745,289.223a17.393,17.393,0,0,0-24.57,0L45.224,319.174a17.393,17.393,0,0,0,0,24.57Z"
-          fill="#05e88b" />
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+  <g id="Group_408" data-name="Group 408" transform="translate(-1575 -1163.002)">
+    <g id="Group_31" data-name="Group 31" transform="translate(1575 1162.781)">
+      <path id="Path_24" data-name="Path 24" d="M705.218,330.307" transform="translate(-691.701 -317.47)" fill="#5b5b5b" stroke="#fff" stroke-miterlimit="10" stroke-width="4"/>
+      <g id="Group_30" data-name="Group 30">
+        <rect id="Rectangle_3151" data-name="Rectangle 3151" width="26" height="26" rx="5" transform="translate(0 0.221)" fill="#2e1954"/>
+        <rect id="Rectangle_3152" data-name="Rectangle 3152" width="20" height="20" rx="5" transform="translate(3 3.221)" fill="none" stroke="#05e88b" stroke-width="1"/>
+        <g id="Group_382" data-name="Group 382" transform="translate(7.269 8.23)">
+          <path id="Path_2" data-name="Path 2" d="M72.793,320.03a2.849,2.849,0,0,0-4.029,0l-.867.867-.867-.867a2.849,2.849,0,0,0-4.029,0h0a2.849,2.849,0,0,0,0,4.029l.867.867,3.656,3.656a.528.528,0,0,0,.746,0l3.656-3.656.867-.867A2.849,2.849,0,0,0,72.793,320.03Z" transform="translate(-62.167 -319.196)" fill="#fff"/>
+          <path id="Path_30" data-name="Path 30" d="M74.717,332.482l-.031,0a.3.3,0,0,1-.266-.247l-.423-2.4-.455,2.4a.3.3,0,0,1-.3.245h0a.3.3,0,0,1-.295-.247l-.3-1.647-.22.379a.3.3,0,0,1-.26.149H70.205a.3.3,0,0,1,0-.6H72l.543-.934a.3.3,0,0,1,.556.1l.156.857.46-2.428a.3.3,0,0,1,.3-.245.3.3,0,0,1,.294.249l.524,2.971.16-.4a.3.3,0,0,1,.28-.19h2.206a.3.3,0,1,1,0,.6h-2l-.476,1.2A.3.3,0,0,1,74.717,332.482Z" transform="translate(-68.145 -325.892)" fill="#353535"/>
+        </g>
       </g>
     </g>
-    <path id="Path_2818" data-name="Path 2818"
-      d="M108.881,322.864a12.524,12.524,0,0,0-17.712,0l-3.811,3.811-3.811-3.811a12.524,12.524,0,0,0-17.712,0h0a12.524,12.524,0,0,0,0,17.712l3.811,3.811,16.071,16.071a2.32,2.32,0,0,0,3.281,0l16.071-16.071,3.812-3.811A12.525,12.525,0,0,0,108.881,322.864Z"
-      fill="#fff" />
-    <path id="Path_2846" data-name="Path 2846"
-      d="M91.059,348.166a1.22,1.22,0,0,1-.135-.007,1.323,1.323,0,0,1-1.168-1.085l-1.861-10.545-2,10.561a1.32,1.32,0,0,1-1.3,1.076H84.59a1.322,1.322,0,0,1-1.3-1.085l-1.319-7.24-.969,1.666a1.322,1.322,0,0,1-1.143.657H71.226a1.322,1.322,0,0,1,0-2.643H79.1l2.387-4.106a1.321,1.321,0,0,1,2.443.428l.687,3.769,2.023-10.672a1.34,1.34,0,0,1,1.307-1.076,1.323,1.323,0,0,1,1.294,1.093l2.305,13.061.7-1.778a1.32,1.32,0,0,1,1.229-.835h9.7a1.322,1.322,0,0,1,0,2.644h-8.8l-2.093,5.282A1.321,1.321,0,0,1,91.059,348.166Z"
-      fill="#353535" />
   </g>
 </svg>
