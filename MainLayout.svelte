@@ -66,6 +66,8 @@
   export let floatingHeader = false
 
   export let hintDownscaleFactor: { start?: number; end?: number } = { start: 25 }
+
+  export let headerBlurContainer = false
 </script>
 
 <svelte:head>
@@ -93,6 +95,7 @@
         'relative z-0 w-screen children:max-w-full mx-auto py-5 grow flex flex-col overflow-y-clip',
       )}>
       <HeaderLayout
+        blurContainer={headerBlurContainer}
         className={{
           container: className.headerContainer,
           wrapper: className.headerWrapper,

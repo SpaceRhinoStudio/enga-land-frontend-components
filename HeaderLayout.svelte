@@ -34,16 +34,18 @@
     [key in 'container' | 'wrapper' | 'navDropContainer' | 'navDropItem']?: string | undefined
   } = {}
   const blur = getContext<BackdropStyleContext>(backdropStyle)?.blur
+  export let blurContainer = false
 </script>
 
 <header
   use:backdrop
+  style={$blur === 0 ? '' : blurContainer ? `filter: blur(${$blur}px);` : ''}
   class={cn(
     'h-24 md:h-28 fixed top-0 left-0 right-0 z-40 flex items-center',
     className.container ?? 'bg-primary-800 shadow-float',
   )}>
   <nav
-    style={$blur === 0 ? '' : `filter: blur(${$blur}px);`}
+    style={$blur === 0 ? '' : blurContainer ? '' : `filter: blur(${$blur}px);`}
     class={cn(
       small
         ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
