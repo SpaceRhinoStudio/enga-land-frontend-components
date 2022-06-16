@@ -111,7 +111,7 @@
         <slot name="footer-foot" slot="foot" />
         <slot name="footer-metadata" slot="metadata" />
       </Footer>
-      <BodyScrollHint {hintDownscaleFactor} />
+      <BodyScrollHint {hintDownscaleFactor} {floatingHeader} />
     </main>
   </div>
   <div class="fixed inset-0 pointer-events-none z-0">
