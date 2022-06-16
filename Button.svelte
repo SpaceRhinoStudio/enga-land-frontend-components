@@ -34,9 +34,8 @@
       : danger
       ? 'border-none bg-blood hover:bg-blood bg-opacity-70 active:bg-blood text-rose-200'
       : 'border-primary-600 active:bg-primary-600',
-    isLoading ||
-      (isJobLoading &&
-        'cursor-wait disabled:cursor-wait text-transparent hover:text-transparent disabled:text-transparent'),
+    (isLoading || isJobLoading) &&
+      'cursor-wait disabled:cursor-wait text-transparent hover:text-transparent disabled:text-transparent',
     secondary ? 'py-1 px-2 rounded-xl text-xs bg-primary-600 leading-none' : 'py-2 px-4 rounded-lg',
     className,
   )}
