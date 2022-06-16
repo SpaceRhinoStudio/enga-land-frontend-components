@@ -16,9 +16,8 @@
 
 <button
   class={cn(
-    $canHover$ && !(isLoading || isJobLoading || disabled)
-      ? 'hover:scale-105 transition-all'
-      : 'transition-colors',
+    'transition-all',
+    $canHover$ && !(isLoading || isJobLoading || disabled) && 'hover:scale-105',
     'relative',
     'border',
     'duration-500',
@@ -37,6 +36,7 @@
     (isLoading || isJobLoading) &&
       'cursor-wait disabled:cursor-wait text-transparent hover:text-transparent disabled:text-transparent',
     secondary ? 'py-1 px-2 rounded-xl text-xs bg-primary-600 leading-none' : 'py-2 px-4 rounded-lg',
+    !active && !disabled && !secondary && 'bg-transparent text-text-primary',
     className,
   )}
   on:click={async () => {
