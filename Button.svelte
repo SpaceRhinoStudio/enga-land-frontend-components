@@ -1,5 +1,6 @@
 <script lang="ts">
   import cn from 'classnames'
+  import { pulse } from './actions/pulse'
 
   import { canHover$ } from './helpers/media-queries'
 
@@ -15,6 +16,7 @@
 </script>
 
 <button
+  use:pulse={{ should: disabled }}
   class={cn(
     'transition-all',
     $canHover$ && !(isLoading || isJobLoading || disabled) && 'hover:scale-105',
