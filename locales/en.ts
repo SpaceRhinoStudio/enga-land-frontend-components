@@ -287,16 +287,22 @@ const locale: WebsiteLocale = new WebsiteLocale({
   marketplace: {
     collectionsTitle: 'Collections',
     noCollection: 'Select a collection to continue...',
-    generation: 'Generation',
     sort: 'Sort',
     ownerTitle: 'Owner',
     sortTitles: {
-      all: 'All',
       [MarketplaceSortOptions.cheap]: 'Cheapest',
       [MarketplaceSortOptions.expensive]: 'Most expensive',
       [MarketplaceSortOptions.latest]: 'Latest',
       [EndroSortOptions.lowerGeneration]: 'Lower generation',
       [EndroSortOptions.higherGeneration]: 'Higher generation',
+      higherTotal: 'Higher Total modifier',
+      lowerTotal: 'Lower Total modifier',
+    },
+    filterTitles: {
+      all: 'All',
+      gen: 'Generation',
+      modifier: 'Modifier',
+      avgGen: 'Average Gen',
     },
     endro: {
       xpLeft: xp => `${xp}XP Left`,

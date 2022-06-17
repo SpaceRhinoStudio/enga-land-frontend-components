@@ -2,6 +2,7 @@ import type { Routes } from '../configs/routes'
 import type { ToastType } from '../contexts/flash-toast'
 import type { VestingType } from '$lib/observables/pre-sale/signers-vestings'
 import type { Web3ProviderId } from '$lib/types'
+import type { ValueTypeUnion } from '../types'
 import type {
   CosmeticSlots,
   EndroItemType,
@@ -10,7 +11,10 @@ import type {
   MainNFTTypes,
   Realms,
 } from '../types/enga'
-import { EndroSortOptions, MarketplaceSortOptions } from '../types/marketplace'
+import {
+  type MarketplaceFilterKeys,
+  marketplaceSortOptions,
+} from '$lib/observables/enga/marketplace-items'
 export interface WebsiteLocaleData {
   main: {
     helloWorld: string
@@ -153,10 +157,12 @@ export interface WebsiteLocaleData {
     collectionsTitle: string
     noCollection: string
     sort: string
-    generation: string
     ownerTitle: string
     sortTitles: {
-      [key in MarketplaceSortOptions | EndroSortOptions | 'all']: string
+      [key in ValueTypeUnion<typeof marketplaceSortOptions>[number]]: string
+    }
+    filterTitles: {
+      [key in MarketplaceFilterKeys | 'all']: string
     }
     endro: {
       xpLeft: (xp: string | number) => string
