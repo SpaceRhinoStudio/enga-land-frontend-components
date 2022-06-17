@@ -15,7 +15,7 @@ html {
     font-size: 85%;
   }
   body {
-    @apply overflow-x-hidden mt-24 md:mt-28;
+    @apply overflow-x-hidden;
     /* #app {
       width: 100vw;
     } */

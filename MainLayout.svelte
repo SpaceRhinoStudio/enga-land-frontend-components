@@ -23,7 +23,7 @@
   import BodyScrollHint from './BodyScrollHint.svelte'
   import { create_fixed_root } from './actions/fixed'
   import { create_backdrop_root } from './actions/backdrop'
-  import {  Readable, writable } from 'svelte/store'
+  import { Readable, writable } from 'svelte/store'
   import ToastContainer from './toast/ToastContainer.svelte'
   import NavigationLoadingJob from './helpers/navigation-loading-job.svelte'
   import { isPageLoading$ } from './observables/is-page-loading'
