@@ -134,7 +134,7 @@
             children:duration-300
             ${isDropped ? 'children:bg-text-primary' : ''}
         `}
-          onClick={e => e.stopPropagation()}>
+          on:click={e => e.stopPropagation()}>
           <div />
           <div class="delay-100" />
           <div class="delay-200" />
