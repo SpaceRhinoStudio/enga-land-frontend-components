@@ -69,8 +69,8 @@
 <div class="flex gap-1 items-center {className.container}">
   {#each children as key (key)}
     <div
-      in:fade
-      out:customTransition
+      in:fade|local
+      out:customTransition|local
       on:introstart={() => {
         key === 'loading' && (isAnimatingLoading = true)
         key === 'data' && (isAnimatingData = true)
