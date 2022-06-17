@@ -1,11 +1,11 @@
 import { Subject } from 'rxjs'
 
 export enum ToastType {
-  success,
-  alert,
-  info,
-  warning,
-  error,
+  success = 'success',
+  alert = 'alert',
+  info = 'info',
+  warning = 'warning',
+  error = 'error',
 }
 
 export type DetailedToast = {

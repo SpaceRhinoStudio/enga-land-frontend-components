@@ -25,6 +25,7 @@
   import { create_fixed_root } from './actions/fixed'
   import { create_backdrop_root } from './actions/backdrop'
   import { derived, Readable } from 'svelte/store'
+  import ToastContainer from './toast/ToastContainer.svelte'
 
   let isLoading: boolean
 
@@ -77,6 +78,7 @@
 <MobileHoverFix />
 <MobileVhFix />
 <MainLoadingOverlay />
+<ToastContainer />
 
 <IsNavigating bind:isLoading />
 {#if isReady}
@@ -87,7 +89,7 @@
     <main
       style="padding-bottom: calc({footerHeight}px + 1.25rem);"
       class={cn(
-        'min-h-[calc(100vh-theme(spacing.24))] md:min-h-[calc(100vh-theme(spacing.28))]',
+        'min-h-[calc(var(--h-screen)-theme(spacing.24))] md:min-h-[calc(var(--h-screen)-theme(spacing.28))]',
         !floatingHeader && 'mt-24 md:mt-28',
         small
           ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
