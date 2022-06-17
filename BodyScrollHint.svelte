@@ -36,9 +36,9 @@
 
 <div
   use:backdrop
-  class="fixed z-[25] {floatingHeader
-    ? 'top-0'
-    : 'top-24 md:top-28'} h-screen left-0 right-0 !pointer-events-none">
+  class="fixed z-[25] top-0 {floatingHeader
+    ? 'pt-0'
+    : 'pt-24 md:pt-28'} h-screen left-0 right-0 !pointer-events-none">
   <div class="relative h-full w-full">
     <!-- topHint -->
     <div
