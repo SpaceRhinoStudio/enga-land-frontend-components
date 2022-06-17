@@ -11,3 +11,14 @@ export const isFirefox$ = Window$.pipe(
   ),
   shareReplay(1),
 )
+
+export const isChrome$ = Window$.pipe(
+  map(
+    () =>
+      CSS.supports('backdrop-filter', 'blur(1px)') &&
+      !CSS.supports('-webkit-backdrop-filter', 'blur(1px)'),
+    // && navigator.userAgent.match(/AppleWebKit/) &&
+    // !navigator.userAgent.match(/Chrome/),
+  ),
+  shareReplay(1),
+)

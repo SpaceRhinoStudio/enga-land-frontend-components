@@ -17,6 +17,7 @@
   import { backdrop } from './actions/backdrop'
   import { getContext } from 'svelte'
   import { backdropStyle, BackdropStyleContext } from './MainLayout.svelte'
+  import { readable } from 'svelte/store'
 
   let isPreview = false
   $: isPreview =
@@ -33,7 +34,7 @@
   export let className: {
     [key in 'container' | 'wrapper' | 'navDropContainer' | 'navDropItem']?: string | undefined
   } = {}
-  const blur = getContext<BackdropStyleContext>(backdropStyle)?.blur
+  const blur = getContext<BackdropStyleContext>(backdropStyle)?.blur ?? readable(0)
   export let blurContainer = false
 </script>
 
@@ -41,7 +42,7 @@
   use:backdrop
   style={$blur === 0 ? '' : blurContainer ? `filter: blur(${$blur}px);` : ''}
   class={cn(
-    'h-24 md:h-28 fixed top-0 left-0 right-0 z-40 flex items-center',
+    'h-24 md:h-28 fixed top-0 left-0 right-0 z-40 flex items-center transition-[filter] duration-500',
     className.container ?? 'bg-primary-800 shadow-float',
   )}>
   <nav
@@ -50,7 +51,7 @@
       small
         ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
         : 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.2xl))]',
-      'w-screen text-text-primary flex items-center justify-between mx-auto',
+      'w-screen text-text-primary flex items-center justify-between mx-auto transition-[filter] duration-500',
       className.wrapper,
     )}>
     <div class="md:hidden cursor-pointer" on:click={() => (isOpen = true)}>
