@@ -7,7 +7,7 @@
 @tailwind utilities; */
 
 html {
-  @apply text-text-primary bg-primary-990;
+  @apply text-text-primary bg-primary-990 overflow-x-hidden;
   --h-screen: calc(var(--vh, 1vh) * 100);
   font-size: max(1em, min(1.4vmin, 1.2vw));
   @media screen and (max-width: 400px) and (orientation: portrait),
