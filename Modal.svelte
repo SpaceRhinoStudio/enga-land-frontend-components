@@ -29,8 +29,8 @@
   $: node && setShouldBlur($portalMap.some(x => (x.index ?? -1) > (index ?? -1)) ? 1 : 0)
 
   $: $portalMap.some(x => x.index !== null)
-    ? (document.body.style.overflow = 'hidden')
-    : (document.body.style.overflow = '')
+    ? (document.documentElement.style.overflow = 'hidden')
+    : (document.documentElement.style.overflow = '')
 
   $: index = changePortalVisibility(node, isOpen)
 </script>

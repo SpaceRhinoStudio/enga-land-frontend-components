@@ -12,8 +12,8 @@
   import { Window$ } from './observables/window'
 
   $: $isPageLoading$
-    ? Window$.subscribe(win => (win.document.body.style.overflow = 'hidden'))
-    : Window$.pipe(delay(300)).subscribe(win => (win.document.body.style.overflow = ''))
+    ? Window$.subscribe(win => (win.document.documentElement.style.overflow = 'hidden'))
+    : Window$.pipe(delay(300)).subscribe(win => (win.document.documentElement.style.overflow = ''))
 
   let isReady = false
   onMount(() => {
