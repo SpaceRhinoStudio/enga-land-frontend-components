@@ -15,7 +15,7 @@
   export let className: { [key in 'item']?: string } = {}
 </script>
 
-<div class="ml-3 py-5 flex gap-2 pr-5" aria-labelledby="navbarDropdown">
+<div class="pl-3 py-5 flex gap-2 pr-5">
   {#each cols as col}
     <div class="flex flex-col space-y-0.5">
       {#each col as x}

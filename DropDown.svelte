@@ -1,10 +1,11 @@
 <script lang="ts">
   import cn from 'classnames'
-  import { slide } from 'svelte/transition'
+  import { fade, type FadeParams, slide, type SlideParams } from 'svelte/transition'
   import { portal } from './actions/portal'
   import { resize_observer } from './actions/resize-observer'
 
   import ClickState from './ClickState.svelte'
+  import { isSafari$ } from './contexts/is-firefox'
   import HoverState from './HoverState.svelte'
 
   export let upward: boolean = false
@@ -51,6 +52,11 @@
     }
   }
 
+  $: transitionIn = (node: HTMLElement, args: FadeParams | SlideParams) =>
+    className.dropContainer?.includes('backdrop') && $isSafari$
+      ? fade(node, args)
+      : slide(node, args)
+
   let exclude: HTMLElement
 
   $: !(hoverState || portalHover) && (shouldLeave = false)
@@ -73,7 +79,7 @@
           <div
             bind:this={exclude}
             use:portal={{ noop: !usePortal }}
-            in:slide={noSlide ? { easing: () => 1 } : {}}
+            in:transitionIn={noSlide ? { easing: () => 1 } : {}}
             out:slide={noSlide ? { easing: () => 0 } : {}}
             style={usePortal
               ? cn(

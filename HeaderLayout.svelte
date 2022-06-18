@@ -18,6 +18,7 @@
   import { getContext } from 'svelte'
   import { backdropStyle, BackdropStyleContext } from './MainLayout.svelte'
   import { readable } from 'svelte/store'
+  import { canHover$ } from './helpers/media-queries'
 
   let isPreview = false
   $: isPreview =
@@ -90,7 +91,7 @@
             dropContainer: className.navDropContainer ?? '',
           }}>
           <Link
-            href={nav.href}
+            href={nav.subRoutes?.length && !$canHover$ ? undefined : nav.href}
             disabled={nav.disabled}
             className={{ element: 'flex items-center' }}>
             {$__$?.nav[nav.id]}
