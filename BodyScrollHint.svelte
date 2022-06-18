@@ -6,7 +6,6 @@
   import { useWobble } from './helpers/wobble-svelte'
   import { resize_observer } from './actions/resize-observer'
   import { fixed } from './actions/fixed'
-  import { backdrop } from './actions/backdrop'
   import { derived } from 'svelte/store'
 
   export let className: {
@@ -37,7 +36,7 @@
 <svelte:window bind:scrollY bind:innerHeight />
 
 <div
-  use:backdrop
+  use:fixed
   class="fixed z-[25] top-0 {floatingHeader
     ? 'pt-0'
     : 'pt-24 md:pt-28'} h-screen left-0 right-0 !pointer-events-none">
