@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onDestroy } from 'svelte'
   import { fade, fly } from 'svelte/transition'
   import { changePortalVisibility, portal, portalMap } from './actions/portal'
   import cn from 'classnames'
   import { useWobble } from './helpers/wobble-svelte'
+  import { shouldHideOverflowController$ } from './contexts/should-hide-overflow'
 
   export let isOpen = false
   export let acceptExit = true
@@ -28,11 +29,15 @@
   const [shouldBlur, setShouldBlur] = useWobble({})
   $: node && setShouldBlur($portalMap.some(x => (x.index ?? -1) > (index ?? -1)) ? 1 : 0)
 
-  $: $portalMap.some(x => x.index !== null)
-    ? (document.documentElement.style.overflow = 'hidden')
-    : (document.documentElement.style.overflow = '')
-
   $: index = changePortalVisibility(node, isOpen)
+
+  let notYetShown = !isOpen
+  $: isOpen && (notYetShown = false)
+  $: isOpen
+    ? shouldHideOverflowController$.next({ Hide: true })
+    : !notYetShown && shouldHideOverflowController$.next({ Hide: false })
+
+  onDestroy(() => isOpen && !notYetShown && shouldHideOverflowController$.next({ Hide: false }))
 </script>
 
 <div use:portal bind:this={node}>

@@ -5,15 +5,17 @@
 <script>
   import { delay } from 'rxjs'
   import { onMount } from 'svelte'
-
   import { fade } from 'svelte/transition'
+  import { shouldHideOverflowController$ } from './contexts/should-hide-overflow'
   import LoadingSpinner from './LoadingSpinner.svelte'
   import { isPageLoading$ } from './observables/is-page-loading'
   import { Window$ } from './observables/window'
 
-  $: $isPageLoading$
-    ? Window$.subscribe(win => (win.document.documentElement.style.overflow = 'hidden'))
-    : Window$.pipe(delay(300)).subscribe(win => (win.document.documentElement.style.overflow = ''))
+  isPageLoading$.subscribe(x =>
+    x
+      ? shouldHideOverflowController$.next({ Hide: true })
+      : shouldHideOverflowController$.next({ Hide: false }),
+  )
 
   let isReady = false
   onMount(() => {
