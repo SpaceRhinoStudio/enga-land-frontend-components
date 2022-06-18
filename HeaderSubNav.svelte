@@ -1,5 +1,6 @@
 <script lang="ts">
   import cn from 'classnames'
+  import { includes, map, split } from 'lodash'
   import { routeConfig, type Routes } from './configs/routes'
   import Link from './Link.svelte'
   import { __$ } from './locales'
@@ -26,7 +27,9 @@
             element: cn(
               'flex gap-3 items-center rounded-xl p-3 border-2 border-transparent transition-colors duration-500',
               !x.disabled && 'hover:border-primary-600 hover:bg-primary-700',
-              className.item,
+              className.item
+                ?.split(' ')
+                .map(cls => (cls.includes('hover:') ? (!x.disabled ? cls : '') : cls)),
             ),
           }}>
           <SvgIcon Icon={x.icon} width="2rem" height="2rem" />
