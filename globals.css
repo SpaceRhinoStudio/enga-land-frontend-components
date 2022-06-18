@@ -14,12 +14,6 @@ html {
     (max-height: 400px) and (orientation: landscape) {
     font-size: 85%;
   }
-  body {
-    @apply overflow-x-hidden;
-    /* #app {
-      width: 100vw;
-    } */
-  }
 }
 
 html,
