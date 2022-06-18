@@ -1,7 +1,7 @@
-import { SENTINEL } from '$lib/shared/contexts/empty-sentinel'
+import { SENTINEL } from '../contexts/empty-sentinel'
 import { filter, map, type OperatorFunction } from 'rxjs'
-import type { NonUndefinable } from '$lib/types'
-import { noSentinelOrUndefined } from '$lib/utils/no-sentinel-or-undefined'
+import type { NonUndefinable } from '../types'
+import { noSentinelOrUndefined } from '../utils/no-sentinel-or-undefined'
 
 export function controlStreamPayload<
   Action extends keyof Payloads,
