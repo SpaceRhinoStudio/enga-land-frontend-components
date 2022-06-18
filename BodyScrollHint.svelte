@@ -7,6 +7,7 @@
   import { resize_observer } from './actions/resize-observer'
   import { fixed } from './actions/fixed'
   import { backdrop } from './actions/backdrop'
+  import { derived } from 'svelte/store'
 
   export let className: {
     [key in 'hint' | 'button']?: string
@@ -25,7 +26,8 @@
   let scrollY: number
   let innerHeight: number
   let scrollHeight: number = 0
-  const [scrollTop, setScrollTop] = useWobble({ damping: 1000, stiffness: 5, mass: 0.1 })
+  const [_scrollTop, setScrollTop] = useWobble({ damping: 1000, stiffness: 5, mass: 0.1 })
+  const scrollTop = derived(_scrollTop, x => (x < 0 ? 0 : x))
   $: setScrollTop(scrollY ?? 0)
 
   export let floatingHeader: boolean
