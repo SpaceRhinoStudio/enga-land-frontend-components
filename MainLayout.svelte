@@ -129,13 +129,13 @@
 
 <div class="fixed inset-0 pointer-events-none z-0">
   <div
-    data-name="backdrop-root"
-    use:create_backdrop_root
-    class="children:pointer-events-auto absolute z-0 inset-0" />
-  <div
     data-name="fixed-root"
     use:create_fixed_root
     class="children:pointer-events-auto absolute z-0 inset-0 transition-[filter] duration-500"
     style={$blur === 0 ? '' : `filter: blur(${$blur}px);`} />
+  <div
+    data-name="backdrop-root"
+    use:create_backdrop_root
+    class="children:pointer-events-auto absolute z-0 inset-0" />
 </div>
 <div id="portal_root" use:create_portal_root />
