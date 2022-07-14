@@ -21,7 +21,7 @@
 
 <footer
   bind:clientHeight
-  class="absolute bottom-0 bg-primary-800 !max-w-none left-1/2 -translate-x-1/2 shadow-float flex justify-center transition-transform duration-500"
+  class="absolute bottom-0 bg-primary-800 !max-w-none w-screen left-1/2 -translate-x-1/2 shadow-float flex justify-center transition-transform duration-500"
   {style}>
   <div
     class={cn(
