@@ -1,4 +1,4 @@
-export const SENTINEL = Symbol('empty-value-sentinel')
+export const SENTINEL: unique symbol = Symbol('empty-value-sentinel')
 export type Sentinel = typeof SENTINEL
 
 export function isSentinel(arg: unknown): arg is Sentinel {
