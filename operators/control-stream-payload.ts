@@ -1,15 +1,94 @@
-import { SENTINEL } from '../contexts/empty-sentinel'
+import { isSentinel, Sentinel, SENTINEL } from '../contexts/empty-sentinel'
 import { filter, map, type OperatorFunction } from 'rxjs'
-import type { NonUndefinable } from '../types'
-import { noSentinelOrUndefined } from '../utils/no-sentinel-or-undefined'
+import { noSentinel } from '../utils/no-sentinel-or-undefined'
+import _ from 'lodash'
+import type { ValueTypeOfKey } from '../types'
+
+function selectOrSentinel<Action extends keyof Payloads, Payloads extends _.Dictionary<unknown>>(
+  action: Action,
+  x: Payloads,
+): ValueTypeOfKey<Payloads, Action> | Sentinel {
+  return (action in x ? x[action] : SENTINEL) as ValueTypeOfKey<Payloads, Action> | Sentinel
+}
 
 export function controlStreamPayload<
   Action extends keyof Payloads,
   Payloads extends _.Dictionary<unknown>,
->(action: Action): OperatorFunction<Payloads, NonUndefinable<Payloads[Action]>> {
+>(action: Action): OperatorFunction<Payloads, ValueTypeOfKey<Payloads, Action>>
+export function controlStreamPayload<
+  Action extends keyof Payloads,
+  Payloads extends _.Dictionary<unknown>,
+  Actions extends readonly [Action, Action],
+>(
+  action: Actions,
+): OperatorFunction<
+  Payloads,
+  //prettier-ignore
+  readonly [
+    ValueTypeOfKey<Payloads,Actions[0]> | Sentinel,
+    ValueTypeOfKey<Payloads,Actions[1]> | Sentinel
+  ]
+>
+export function controlStreamPayload<
+  Action extends keyof Payloads,
+  Payloads extends _.Dictionary<unknown>,
+  Actions extends readonly [Action, Action, Action],
+>(
+  action: Actions,
+): OperatorFunction<
+  Payloads,
+  readonly [
+    ValueTypeOfKey<Payloads, Actions[0]> | Sentinel,
+    ValueTypeOfKey<Payloads, Actions[1]> | Sentinel,
+    ValueTypeOfKey<Payloads, Actions[2]> | Sentinel,
+  ]
+>
+export function controlStreamPayload<
+  Action extends keyof Payloads,
+  Payloads extends _.Dictionary<unknown>,
+  Actions extends readonly [Action, Action, Action, Action],
+>(
+  action: Actions,
+): OperatorFunction<
+  Payloads,
+  readonly [
+    ValueTypeOfKey<Payloads, Actions[0]> | Sentinel,
+    ValueTypeOfKey<Payloads, Actions[1]> | Sentinel,
+    ValueTypeOfKey<Payloads, Actions[2]> | Sentinel,
+    ValueTypeOfKey<Payloads, Actions[3]> | Sentinel,
+  ]
+>
+export function controlStreamPayload<
+  Action extends keyof Payloads,
+  Payloads extends _.Dictionary<unknown>,
+>(
+  action: Action | Action[],
+): OperatorFunction<
+  Payloads,
+  ValueTypeOfKey<Payloads, Action> | (ValueTypeOfKey<Payloads, Action> | Sentinel)[]
+> {
   return source =>
     source.pipe(
-      map(x => (action in x ? x[action] : SENTINEL)),
-      filter(noSentinelOrUndefined),
+      map(x => {
+        let res:
+          | ValueTypeOfKey<Payloads, Action>
+          | Sentinel
+          | (ValueTypeOfKey<Payloads, Action> | Sentinel)[]
+
+        if (_.isArray(action)) {
+          res = action.reduce((acc, action) => {
+            const res = selectOrSentinel(action, x)
+            const a = [...acc, res as typeof res]
+            return a
+          }, [] as (ValueTypeOfKey<Payloads, Action> | Sentinel)[])
+          if (res.every(isSentinel)) {
+            res = SENTINEL
+          }
+        } else {
+          res = action in x ? (x[action] as ValueTypeOfKey<Payloads, Action>) : SENTINEL
+        }
+        return res
+      }),
+      filter(noSentinel),
     )
 }
