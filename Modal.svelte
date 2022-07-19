@@ -7,7 +7,7 @@
   import { shouldHideOverflowController$ } from './contexts/should-hide-overflow'
 
   export let isOpen = false
-  export let acceptExit = true
+  export let acceptExit = false
   export const toggle = () => {
     isOpen = !isOpen
   }
