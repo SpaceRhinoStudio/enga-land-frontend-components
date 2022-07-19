@@ -202,9 +202,9 @@ export const routeConfig: {
   },
   [Routes.github]: {
     id: Routes.github,
-    href: 'https://github.com/',
+    href: 'https://github.com/SpaceRhinoStudio',
     icon: GitHubIcon,
-    disabled: true,
+    disabled: false,
   },
   [Routes.community]: {
     id: Routes.community,
