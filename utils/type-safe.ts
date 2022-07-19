@@ -10,3 +10,11 @@ export function keysOf<K extends string | number = number>(
   }
   return _.keys(source) as K[]
 }
+
+export function isEqual<T, S>(a: T, b: S): boolean {
+  return _.isEqual(a, b)
+}
+
+export function isArray<T, S>(x: readonly T[] | S): x is readonly T[] {
+  return Array.isArray(x)
+}
