@@ -45,6 +45,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
           xp: '8.0%',
           zealDefect: '2.0%',
           meritPoints: '1 per 10 levels',
+          meritPointsSum: '1/0',
         },
         [Realms.magesta]: {
           description:
@@ -53,6 +54,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
           xp: '2.5%',
           zealDefect: '2.5%',
           meritPoints: '2 per 5 levels',
+          meritPointsSum: '2/5',
         },
         [Realms.nubia]: {
           description:
@@ -61,6 +63,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
           xp: '3.5%',
           zealDefect: '3.0%',
           meritPoints: '2 per 10 levels',
+          meritPointsSum: '2/10',
         },
         [Realms.ufm]: {
           description:
@@ -69,6 +72,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
           xp: '1.0%',
           zealDefect: '6.0%',
           meritPoints: '2 per 9 levels',
+          meritPointsSum: '2/9',
         },
         [Realms.komorebi]: {
           description:
@@ -77,6 +81,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
           xp: '2.0%',
           zealDefect: '4.0%',
           meritPoints: '1 per 2 levels',
+          meritPointsSum: '1/2',
         },
       },
     },
@@ -201,6 +206,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
     [Routes.mpSales]: 'My Sales',
     [Routes.mpPurchases]: 'My Purchases',
     [Routes.mpEndroSingle]: 'Single Endro',
+    [Routes.opifex]: 'Opifex Machine',
     notFound: "You're Lost!",
   },
   userInteraction: {
@@ -326,6 +332,14 @@ const locale: WebsiteLocale = new WebsiteLocale({
     nftsOfType: type => `${type} NFTs`,
     listInMarketplace: 'List in marketplace',
     itsYou: 'You',
+    opifex: {
+      yourBalance: 'Your Balance',
+      balance: 'Balance',
+      mint: 'Mint',
+    },
+  },
+  acquireTickets: {
+    moreSolarHint: 'Low on `SOLAR`? Get more by staking `ENGA` tokens.',
   },
   EngaVerse: {
     engaland: 'Engaland',
