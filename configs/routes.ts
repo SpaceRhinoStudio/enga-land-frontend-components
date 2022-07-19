@@ -63,6 +63,7 @@ export enum Routes {
   'mpListings' = 'mpListings',
   'mpSales' = 'mpSales',
   'mpPurchases' = 'mpPurchases',
+  'opifex' = 'opifex',
 }
 
 export type RouteConfig = {
@@ -160,6 +161,7 @@ export const routeConfig: {
     href: href.dapp('/tickets'),
     icon: TicketsIcon,
     disabled: true,
+    preview: true,
   },
   [Routes.telegram]: {
     id: Routes.telegram,
@@ -299,5 +301,12 @@ export const routeConfig: {
     preview: true,
     disabled: false,
     icon: undefined,
+  },
+  [Routes.opifex]: {
+    id: Routes.opifex,
+    href: href.dapp('/dashboard/manage/opifex'),
+    icon: MPOpifexIndexedIcon,
+    disabled: true,
+    preview: true,
   },
 }
