@@ -1,19 +1,46 @@
+<script lang="ts" context="module">
+  const calc = (maxMove: number) => (max: number) => (curr: number) => {
+    let rand = (Math.random() - 0.5) * (max * maxMove)
+    return Math.abs(curr + rand) > max * maxMove ? Math.sign(curr + rand) * max * 0.5 : curr + rand
+  }
+
+  function springUpdater(setter: (value: number) => void) {
+    let isFirstTimeAccelerating = true
+    setter(0)
+    return _.throttle(
+      ({
+        currentVelocity: v,
+        currentValue: x,
+      }: Pick<Spring, 'currentValue' | 'currentVelocity'>) => {
+        if (v < 0.001) {
+          if (!isFirstTimeAccelerating) {
+            setter(x)
+          }
+        } else {
+          isFirstTimeAccelerating = false
+        }
+      },
+      1000,
+      { leading: true, trailing: true },
+    )
+  }
+</script>
+
 <script lang="ts">
   import { onMount } from 'svelte'
   import { useWobble } from './helpers/wobble-svelte'
   import _ from 'lodash'
-  import { SpringConfig } from 'wobble'
+  import { Spring, SpringConfig } from 'wobble'
 
   export let maxMove = 1
+  export let maxRotate = 1
+  export let massMultiplier = 1
   export let rotate = false
 
-  function calcNew(prev: number, max: number) {
-    let rand = (Math.random() - 0.5) * (max * maxMove)
-    return Math.abs(prev + rand) > max * maxMove ? Math.sign(prev + rand) * max * 0.5 : prev + rand
-  }
-
-  let width: number
-  let height: number
+  let width: number = 0
+  let height: number = 0
+  export { width as clientWidth }
+  export { height as clientHeight }
 
   export let config: Partial<SpringConfig> = {}
 
@@ -25,50 +52,27 @@
 
   onMount(() => {
     if (config.mass === undefined) {
-      springX.current.updateConfig({ mass: (height + width) * 3 })
-      springY.current.updateConfig({ mass: (height + width) * 3 })
-      springR.current.updateConfig({ mass: (height + width) * 20 })
-    }
-    const newX = _.throttle(
-      (v: number, x: number) => {
-        if (v < 0.001) {
-          setX(calcNew(x, width))
-        }
-      },
-      1000,
-      { leading: true, trailing: true },
-    )
-    const newY = _.throttle(
-      (v: number, y: number) => {
-        if (v < 0.001) {
-          setY(calcNew(y, height))
-        }
-      },
-      1000,
-      { leading: true, trailing: true },
-    )
-    const newR = _.throttle(
-      (v: number, r: number) => {
-        if (v < 0.001) {
-          setR(calcNew(r, 360))
-        }
-      },
-      1000,
-      { leading: true, trailing: true },
-    )
-    newX(0, 0)
-    newY(0, 0)
-    rotate && newR(0, 0)
-    springX.current.onUpdate(x => {
-      newX(x.currentVelocity, x.currentValue)
-    })
-    springY.current.onUpdate(y => {
-      newY(y.currentVelocity, y.currentValue)
-    })
-    rotate &&
-      springR.current.onUpdate(r => {
-        newR(r.currentVelocity, r.currentValue)
+      ;(
+        [
+          [springX, 3],
+          [springY, 3],
+          [springR, 20],
+        ] as const
+      ).forEach(([spring, mult]) => {
+        spring.current.updateConfig({ mass: (height + width) * mult * massMultiplier })
       })
+    }
+    ;(
+      [
+        [springX, setX, maxMove, width, true],
+        [springY, setY, maxMove, height, true],
+        [springR, setR, maxRotate, 360, rotate],
+      ] as const
+    ).forEach(([spring, setter, maxMult, max, enabled]) => {
+      if (enabled) {
+        spring.current.onUpdate(springUpdater(x => setter(calc(maxMult)(max)(x))))
+      }
+    })
   })
 
   export let className: string = ''
