@@ -1,10 +1,14 @@
 <script lang="ts">
+  import cn from 'classnames'
+
   import { SpringConfig } from 'wobble'
+  import { isFirefox$, isSafari$ } from './contexts/is-firefox'
 
   import { canHover$ } from './helpers/media-queries'
   import { useWobble } from './helpers/wobble-svelte'
 
   let measure: HTMLElement
+  export let passFilterDown = false
   let whereTo = { x: 0, y: 0 }
   export let config: Partial<SpringConfig> = {}
   export let multiplier: number = 13
@@ -21,15 +25,19 @@
 
 <div
   bind:this={measure}
-  style="transform: perspective(800px) rotateX({$x}deg) rotateY({$y}deg);"
-  class={className}
-  on:mouseleave={() => {
+  style="transform: perspective({$isFirefox$
+    ? 900
+    : 600}px) rotateX({$x}deg) rotateY({$y}deg) {$isSafari$
+    ? 'translateZ(10px)'
+    : ''}; {!passFilterDown ? `filter: brightness(${1 + ($x / 90) * 2});` : ''}"
+  class={cn('will-change-transform', className)}
+  on:pointerleave={() => {
     whereTo = {
       x: 0,
       y: 0,
     }
   }}
-  on:mousemove={e => {
+  on:pointermove={e => {
     if ($canHover$ && !disabled) {
       const { top, left, height, width } = measure.getBoundingClientRect()
       whereTo = {
@@ -38,5 +46,5 @@
       }
     }
   }}>
-  <slot />
+  <slot filter="filter: brightness({1 + ($x / 90) * 2});" />
 </div>
