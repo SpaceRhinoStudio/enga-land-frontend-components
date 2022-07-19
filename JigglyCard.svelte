@@ -21,6 +21,7 @@
 
   export let disabled = false
   export let className = ''
+  export let brightnessMaxRotation = 90
 </script>
 
 <div
@@ -29,7 +30,7 @@
     ? 900
     : 600}px) rotateX({$x}deg) rotateY({$y}deg) {$isSafari$
     ? 'translateZ(10px)'
-    : ''}; {!passFilterDown ? `filter: brightness(${1 + ($x / 90) * 2});` : ''}"
+    : ''}; {!passFilterDown ? `filter: brightness(${1 + ($x / brightnessMaxRotation) * 2});` : ''}"
   class={cn('will-change-transform', className)}
   on:pointerleave={() => {
     whereTo = {
@@ -46,5 +47,5 @@
       }
     }
   }}>
-  <slot filter="filter: brightness({1 + ($x / 90) * 2});" />
+  <slot filter="filter: brightness({1 + ($x / brightnessMaxRotation) * 2});" />
 </div>
