@@ -116,7 +116,7 @@ export const routeConfig: {
     id: Routes.marketplace,
     href: href.dapp('/marketplace'),
     icon: MarketPlaceIcon,
-    disabled: false,
+    disabled: true,
     preview: true,
   },
   [Routes.help]: {
@@ -142,7 +142,7 @@ export const routeConfig: {
     id: Routes.staking,
     href: href.dapp('/staking'),
     icon: StakingIcon,
-    disabled: false,
+    disabled: true,
     preview: true,
   },
   [Routes.exchange]: {
@@ -167,7 +167,7 @@ export const routeConfig: {
     id: Routes.tickets,
     href: href.dapp('/tickets'),
     icon: TicketsIcon,
-    disabled: false,
+    disabled: true,
     preview: true,
   },
   [Routes.telegram]: {
@@ -313,7 +313,7 @@ export const routeConfig: {
     id: Routes.opifex,
     href: href.dapp('/dashboard/manage/opifex'),
     icon: MPOpifexIndexedIcon,
-    disabled: false,
+    disabled: true,
     preview: true,
   },
 }
