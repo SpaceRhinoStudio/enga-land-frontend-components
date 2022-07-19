@@ -13,12 +13,14 @@
   export let disabled = false
   export let job: () => Promise<void> | void
   export let className = ''
+  export let style = ''
 </script>
 
 <button
   use:pulse={{ should: disabled }}
+  {style}
   class={cn(
-    'transition-all',
+    'transition-[color,background-color,border-color,text-decoration-color,fill,stroke,transform,box-shadow]',
     $canHover$ && !(isLoading || isJobLoading || disabled) && 'hover:scale-105',
     'relative',
     'border',
