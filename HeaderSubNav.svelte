@@ -1,6 +1,7 @@
 <script lang="ts">
   import cn from 'classnames'
   import { includes, map, split } from 'lodash'
+  import { createEventDispatcher } from 'svelte'
   import { routeConfig, type Routes } from './configs/routes'
   import Link from './Link.svelte'
   import { __$ } from './locales'
@@ -13,6 +14,7 @@
   ].map(col => col.map(x => routeConfig[x]))
 
   export let className: { [key in 'item']?: string } = {}
+  let dispatch = createEventDispatcher<{ click: MouseEvent }>()
 </script>
 
 <div class="pl-3 py-5 flex gap-2 pr-5">
@@ -20,6 +22,7 @@
     <div class="flex flex-col space-y-0.5">
       {#each col as x}
         <Link
+          on:click={e => dispatch('click', e.detail)}
           href={x.href}
           disabled={x.disabled}
           className={{

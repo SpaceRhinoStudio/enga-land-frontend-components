@@ -35,7 +35,7 @@
   export let className: {
     [key in 'container' | 'wrapper' | 'navDropContainer' | 'navDropItem']?: string | undefined
   } = {}
-  const blur = getContext<BackdropStyleContext>(backdropStyle)?.blur ?? readable(0)
+  $: blur = getContext<BackdropStyleContext>(backdropStyle)?.blur ?? readable(0)
   export let blurContainer = false
 </script>
 
@@ -84,6 +84,7 @@
     <ul class="grow children:h-full {small ? 'ml-6' : 'ml-12'} h-10 hidden md:flex children:px-3">
       {#each routeConfigs as nav}
         <DropDown
+          let:dismiss
           usePortal
           let:isDropped
           className={{
@@ -108,6 +109,7 @@
           <div slot="drop">
             {#if nav.subRoutes}
               <HeaderSubNav
+                on:click={dismiss}
                 className={{ item: className.navDropItem ?? '' }}
                 routes={nav.subRoutes} />
             {/if}
@@ -115,6 +117,7 @@
         </DropDown>
       {/each}
       <DropDown
+        let:dismiss
         usePortal
         let:isDropped
         className={{
@@ -142,6 +145,7 @@
           <div class="delay-200" />
         </span>
         <HeaderSubNav
+          on:click={dismiss}
           className={{ item: className.navDropItem ?? '' }}
           slot="drop"
           routes={collapsedRoutes} />
