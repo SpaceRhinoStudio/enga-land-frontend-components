@@ -7,6 +7,7 @@
   import _ from 'lodash'
   import { onMount } from 'svelte'
   import { pageLoadingJobs$ } from '../contexts/loading-jobs'
+  import { waitForF } from './wait-for'
 
   const initialResolve = { current: _.noop }
   pageLoadingJobs$.next(new Promise<void>(res => (initialResolve.current = res)))
@@ -20,7 +21,10 @@
       whitelist.to = to.pathname
       pageLoadingJobs$.next(new Promise<void>(res => (resolve.current = res)))
       setTimeout(() => {
-        goto(whitelist.to ?? '/').then(() => (whitelist.to = null))
+        goto(whitelist.to ?? '/')
+          .then(() => (whitelist.to = null))
+          .then(waitForF(200))
+          .then(() => window.scrollTo(0, 0))
       }, 250)
     }
   })
