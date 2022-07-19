@@ -13,13 +13,13 @@
   import { DetailedToast, flashToast$, ToastType } from '../contexts/flash-toast'
   import _ from 'lodash'
   import { map, scan, Subject, tap, timer } from 'rxjs'
-  import { flip } from 'svelte/animate'
   import ToastInner from './ToastInner.svelte'
-  import { fixed } from '../actions/fixed'
   import { fly } from 'svelte/transition'
   import cn from 'classnames'
   import { swipe_to_dismiss } from '../actions/swipe-to-dismiss'
   import { tick } from 'svelte'
+  import { flip } from 'svelte/animate'
+  import { portal } from '../actions/portal'
 
   const toastControl$ = new Subject<
     Partial<{
@@ -82,8 +82,8 @@
 </script>
 
 <div
-  use:fixed
-  class="!pointer-events-none children:pointer-events-auto fixed right-0 bottom-0 left-0 md:left-[calc(100vw-32rem)] sm:left-1/2 px-5 pb-5 flex flex-col items-stretch z-40 space-y-2 select-none">
+  use:portal
+  class="!pointer-events-none children:pointer-events-auto fixed right-0 bottom-0 left-0 md:left-[calc(100vw-32rem)] sm:left-1/2 px-5 pb-5 flex flex-col items-stretch space-y-2 select-none z-[999]">
   {#each $toasts$ ?? [] as x (x.id)}
     <div
       use:swipe_to_dismiss
@@ -92,7 +92,7 @@
         tick().then(() => toastControl$.next({ Remove: x.id }))
       }}
       bind:clientWidth
-      animate:flip
+      animate:flip={{ duration: 200 }}
       in:fly={{ y: 200 }}
       out:fly={{
         x: x.dismiss ? (x.dismiss === 'left' ? (-1 * clientWidth) / 3 : clientWidth / 3) : 0,
