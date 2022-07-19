@@ -3,13 +3,12 @@
 </script>
 
 <script>
-  import { delay } from 'rxjs'
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
+  import { isSafari$ } from './contexts/is-firefox'
   import { shouldHideOverflowController$ } from './contexts/should-hide-overflow'
   import LoadingSpinner from './LoadingSpinner.svelte'
   import { isPageLoading$ } from './observables/is-page-loading'
-  import { Window$ } from './observables/window'
 
   isPageLoading$.subscribe(x =>
     x
@@ -28,13 +27,15 @@
     in:fade={{ duration: 150 }}
     out:fade={{ duration: 300 }}
     id="preloading_spinner"
-    class="z-index-bug-fix flex justify-center items-center fixed inset-0 z-[60] bg-primary-990">
+    class="{$isSafari$
+      ? 'z-index-bug-fix'
+      : ''} flex justify-center items-center fixed inset-0 z-[1000] bg-primary-990">
     <LoadingSpinner --big="1" />
   </div>
 {/if}
 
 <style>
   .z-index-bug-fix {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 25rem);
   }
 </style>
