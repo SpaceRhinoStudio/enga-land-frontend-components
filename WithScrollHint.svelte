@@ -7,6 +7,7 @@
   import { canHover$ } from './helpers/media-queries'
   import { fade } from 'svelte/transition'
   import cn from 'classnames'
+  import { createEventDispatcher } from 'svelte'
 
   export let className: {
     [key in 'wrapper' | 'innerWrapper' | 'container' | 'hint' | 'button']?: string
@@ -51,15 +52,20 @@
   }
 
   export let scroll = { top: 0, left: 0 }
+
+  export let snapCenter = false
+  export let alwaysShowButtons = false
+
+  const dispatch = createEventDispatcher<{ change: 'next' | 'prev' | 'top' }>()
 </script>
 
-<div class="relative overflow-hidden {className.container}">
+<div class="relative z-0 overflow-hidden {className.container}">
   <div
     class={cn(
       outerBounds.height < innerBounds.height && 'overscroll-contain',
       'max-h-full',
       horizontalScrollButtons &&
-        $canHover$ &&
+        ($canHover$ || alwaysShowButtons) &&
         outerBounds.width < outerBounds.scrollWidth &&
         'snap-x snap-mandatory snap-always scrollbar-hide',
       mode === 'vertical' && 'overflow-x-hidden',
@@ -82,11 +88,14 @@
       on:resize={e => (innerBounds = e.detail)}
       data-name="inner"
       class={cn(
+        'w-fit',
+        'relative z-0',
         className?.innerWrapper,
         horizontalScrollButtons &&
-          $canHover$ &&
+          ($canHover$ || alwaysShowButtons) &&
           outerBounds.width < outerBounds.scrollWidth &&
-          'children:snap-start children:scroll-m-10',
+          'children:scroll-m-10',
+        snapCenter ? 'children:snap-center mx-[50%]' : 'children:snap-start',
       )}>
       <slot />
     </div>
@@ -96,7 +105,7 @@
   {#if mode !== 'horizontal'}
     <div
       data-name="top-hint"
-      class="will-change-[opacity] absolute -top-px left-0 right-0 bg-gradient-to-b to-transparent pointer-events-none select-none -translate-y-px {className?.hint ??
+      class="fix-z-index will-change-[opacity] absolute -top-px left-0 right-0 bg-gradient-to-b to-transparent pointer-events-none select-none -translate-y-px {className?.hint ??
         'from-primary-990'}"
       style="height: {(outerBounds.height + outerBounds.paddingY) /
         (hintDownscaleFactor.start ?? 1)}px; opacity: {Math.min(scroll.top, hideThreshold) /
@@ -107,7 +116,7 @@
   {#if mode !== 'horizontal'}
     <div
       data-name="bottom-hint"
-      class="will-change-[opacity] absolute -bottom-px left-0 right-0 bg-gradient-to-t to-transparent pointer-events-none select-none {className?.hint ??
+      class="fix-z-index will-change-[opacity] absolute -bottom-px left-0 right-0 bg-gradient-to-t to-transparent pointer-events-none select-none {className?.hint ??
         'from-primary-990'}"
       style="height: {(outerBounds.height + outerBounds.paddingY) /
         (hintDownscaleFactor.end ?? 1)}px; opacity: {Math.min(
@@ -120,7 +129,7 @@
   {#if mode !== 'vertical'}
     <div
       data-name="left-hint"
-      class="will-change-[opacity] absolute -left-px top-0 bottom-0 bg-gradient-to-r to-transparent pointer-events-none select-none {className?.hint ??
+      class="fix-z-index will-change-[opacity] absolute -left-px top-0 bottom-0 bg-gradient-to-r to-transparent pointer-events-none select-none {className?.hint ??
         'from-primary-990'}"
       style="width: {(outerBounds.width + outerBounds.paddingX) /
         (hintDownscaleFactor.start ?? 1)}px; opacity: {Math.min(scroll.left, hideThreshold) /
@@ -131,7 +140,7 @@
   {#if mode !== 'vertical'}
     <div
       data-name="right-hint"
-      class="will-change-[opacity] absolute -right-px top-0 bottom-0 bg-gradient-to-l to-transparent pointer-events-none select-none {className?.hint ??
+      class="fix-z-index will-change-[opacity] absolute -right-px top-0 bottom-0 bg-gradient-to-l to-transparent pointer-events-none select-none {className?.hint ??
         'from-primary-990'}"
       style="width: {(outerBounds.width + outerBounds.paddingX) /
         (hintDownscaleFactor.end ?? 1)}px; opacity: {Math.min(
@@ -146,37 +155,50 @@
       <div
         transition:fade
         class="bg-primary-900 rounded-full h-10 w-10 absolute right-4 bottom-4 shadow-lg shadow-primary-990 z-[11] cursor-pointer flex justify-center items-center transition-opacity {className.button}"
-        on:click={() => outerRef?.scroll({ behavior: 'smooth', top: 0 })}>
+        on:click={() => {
+          outerRef?.scroll({ behavior: 'smooth', top: 0 })
+          dispatch('change', 'top')
+        }}>
         <SvgIcon Icon={ScrollTopIcon} width="1.5rem" height="1.5rem" />
       </div>
     {/if}
   {/if}
-  {#if horizontalScrollButtons && $canHover$ && outerBounds.width < outerBounds.scrollWidth}
+  {#if horizontalScrollButtons && ($canHover$ || alwaysShowButtons) && outerBounds.width < outerBounds.scrollWidth}
     <!-- scrollRightButton -->
     <div
-      class="bg-primary-990 rounded-full h-8 w-8 absolute right-1.5 top-1/2 -translate-y-1/2 z-[11] cursor-pointer flex justify-center items-center transition-opacity"
+      class="fix-z-index bg-primary-990 rounded-full h-8 w-8 absolute right-1.5 top-1/2 -translate-y-1/2 z-[11] cursor-pointer flex justify-center items-center transition-opacity"
       style="opacity: {Math.min(
         innerBounds.scrollWidth - (scroll.left + outerBounds.width),
         hideThreshold,
       ) / hideThreshold};"
-      on:click={() =>
+      on:click={() => {
         outerRef?.scroll({
           behavior: 'smooth',
           left: scroll.left + outerBounds.width / 2,
-        })}>
+        })
+        dispatch('change', 'next')
+      }}>
       <SvgIcon Icon={ScrollTopIcon} width="1.3rem" height="1.3rem" className="rotate-90" />
     </div>
 
     <!-- scrollLeftButton -->
     <div
-      class="bg-primary-990 rounded-full h-8 w-8 absolute left-1.5 top-1/2 -translate-y-1/2 z-[11] cursor-pointer flex justify-center items-center transition-opacity"
+      class="fix-z-index bg-primary-990 rounded-full h-8 w-8 absolute left-1.5 top-1/2 -translate-y-1/2 z-[11] cursor-pointer flex justify-center items-center transition-opacity"
       style="opacity: {Math.min(scroll.left, hideThreshold) / hideThreshold};"
-      on:click={() =>
+      on:click={() => {
         outerRef?.scroll({
           behavior: 'smooth',
           left: scroll.left - outerBounds.width / 2,
-        })}>
+        })
+        dispatch('change', 'prev')
+      }}>
       <SvgIcon Icon={ScrollTopIcon} width="1.3rem" height="1.3rem" className="-rotate-90" />
     </div>
   {/if}
 </div>
+
+<style>
+  .fix-z-index {
+    transform: translateZ(0.5rem);
+  }
+</style>
