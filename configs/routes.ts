@@ -31,6 +31,7 @@ import MPPurchasesIcon from '../assets/icons/marketplace-purchases.svg'
 import MPSkinsIcon from '../assets/icons/vuesax-linear-magic-star.svg'
 
 export enum Routes {
+  'landing' = 'landing',
   'home' = 'home',
   'dapp' = 'dapp',
   'marketplace' = 'marketplace',
@@ -85,9 +86,15 @@ const href = {
 export const routeConfig: {
   [key in Routes]: RouteConfig
 } = {
+  [Routes.landing]: {
+    id: Routes.landing,
+    href: href.landing('/'),
+    icon: HomeIcon,
+    disabled: false,
+  },
   [Routes.home]: {
     id: Routes.home,
-    href: href.landing('/'),
+    href: '/',
     icon: HomeIcon,
     disabled: false,
   },
@@ -109,7 +116,7 @@ export const routeConfig: {
     id: Routes.marketplace,
     href: href.dapp('/marketplace'),
     icon: MarketPlaceIcon,
-    disabled: true,
+    disabled: false,
     preview: true,
   },
   [Routes.help]: {
@@ -135,7 +142,7 @@ export const routeConfig: {
     id: Routes.staking,
     href: href.dapp('/staking'),
     icon: StakingIcon,
-    disabled: true,
+    disabled: false,
     preview: true,
   },
   [Routes.exchange]: {
@@ -160,7 +167,7 @@ export const routeConfig: {
     id: Routes.tickets,
     href: href.dapp('/tickets'),
     icon: TicketsIcon,
-    disabled: true,
+    disabled: false,
     preview: true,
   },
   [Routes.telegram]: {
@@ -306,7 +313,7 @@ export const routeConfig: {
     id: Routes.opifex,
     href: href.dapp('/dashboard/manage/opifex'),
     icon: MPOpifexIndexedIcon,
-    disabled: true,
+    disabled: false,
     preview: true,
   },
 }

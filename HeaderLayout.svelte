@@ -59,7 +59,7 @@
       <SvgIcon Icon={SidebarToggleIcon} width={'1.75rem'} height={'1.75rem'} />
     </div>
     <Link
-      href="/"
+      href={routeConfig[Routes.landing].href}
       className={{
         element: 'absolute md:relative left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0',
       }}>
