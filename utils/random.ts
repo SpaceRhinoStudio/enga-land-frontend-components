@@ -38,3 +38,7 @@ export function rndPick<T>(arr: T[], length: number): T[] {
 export function rndEnum<T>(target: Record<string | number, T>): T {
   return target[rndElm(keysOf(target))]!
 }
+
+export function rndSign(): number {
+  return rnd(2) === 0 ? 1 : -1
+}
