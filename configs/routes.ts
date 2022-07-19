@@ -163,15 +163,15 @@ export const routeConfig: {
   },
   [Routes.telegram]: {
     id: Routes.telegram,
-    href: 'https://telegram.org',
+    href: 'https://t.me/engaland_en',
     icon: TelegramIcon,
-    disabled: true,
+    disabled: false,
   },
   [Routes.twitter]: {
     id: Routes.twitter,
-    href: 'https://twitter.com',
+    href: 'https://twitter.com/engaverse',
     icon: TwitterIcon,
-    disabled: true,
+    disabled: false,
   },
   [Routes.discord]: {
     id: Routes.discord,
