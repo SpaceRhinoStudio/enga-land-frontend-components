@@ -138,4 +138,4 @@
     use:create_backdrop_root
     class="children:pointer-events-auto absolute z-0 inset-0" />
 </div>
-<div id="portal_root" use:create_portal_root />
+<div id="portal_root" class="z-index-bug-fix-children" use:create_portal_root />
