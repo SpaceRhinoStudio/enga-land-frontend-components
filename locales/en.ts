@@ -101,24 +101,29 @@ const locale: WebsiteLocale = new WebsiteLocale({
         {
           title: 'ICO (Q3 2022)',
           items: [
+            ['Dapp launch', true],
             ['Seed sale', false],
             ['Private sale', false],
             ['Marketing campaign', false],
             ['Public sale', false],
-            ['Dapp launch', true],
             ['DAO launch', false],
             ['Token listings on CoinMarketCap & CoinGecko', false],
+            ['Endros primary design', true],
+            ['Generals primary design', true],
           ],
         },
         {
           title: 'MARKETPLACE (Q3-Q4 2022)',
           items: [
-            ['Endro NFTs', false],
+            ['Endro NFTs Auction', false],
+            ['Marketing campaign', false],
+            ['On-chain PvP game', false],
+            ["Generals' Avatars", false],
+            ['Staking reward tickets and item airdrops', false],
             ['Endro wearables', false],
             ['Consumable NFTs', false],
             ['Rarity farming', false],
-            ['Marketing campaign', false],
-            ['Auction house/marketplace', false],
+            ['Auction house / Marketplace', false],
             ['Enga game teaser', false],
           ],
         },
@@ -127,7 +132,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
           items: [
             ['Providing liquidity for DEX', false],
             ['GameDev team incubation', false],
-            ['Engaland game', false],
+            ['EngaLand main game', false],
             ['Game server', false],
             ['Enga game beta release', false],
             ['Marketing campaign & twitter trend', false],
@@ -157,6 +162,9 @@ const locale: WebsiteLocale = new WebsiteLocale({
     },
     technologies: {
       title: 'TECHNOLOGIES',
+    },
+    partners: {
+      title: 'PARTNERS',
     },
   },
   header: { connectWallet: 'CONNECT WALLET' },

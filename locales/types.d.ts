@@ -66,6 +66,9 @@ export interface WebsiteLocaleData {
     technologies: {
       title: string
     }
+    partners: {
+      title: string
+    }
   }
   header: {
     connectWallet: string
