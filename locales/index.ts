@@ -1,4 +1,4 @@
-import { WebsiteLocale, type WebsiteLocaleData } from './interface'
+import { WebsiteLocale } from './interface'
 import {
   asapScheduler,
   BehaviorSubject,
@@ -19,6 +19,7 @@ export const __$ = new ReplaySubject<WebsiteLocaleData>(1)
 export const locale$ = new BehaviorSubject<string>('en')
 
 import en from './en'
+import type { WebsiteLocaleData } from './types'
 const localeImportMaps = {
   en,
 }

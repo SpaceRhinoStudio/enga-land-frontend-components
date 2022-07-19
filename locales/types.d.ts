@@ -45,6 +45,7 @@ export interface WebsiteLocaleData {
           xp: string
           zealDefect: string
           meritPoints: string
+          meritPointsSum: string
           subtitle: string
         }
       }
@@ -181,6 +182,14 @@ export interface WebsiteLocaleData {
     nftsOfType: (type: string) => string
     listInMarketplace: string
     itsYou: string
+    opifex: {
+      yourBalance: string
+      balance: string
+      mint: string
+    }
+  }
+  acquireTickets: {
+    moreSolarHint: string
   }
   EngaVerse: {
     engaland: string
