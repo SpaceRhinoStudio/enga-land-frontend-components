@@ -189,7 +189,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
             { value: 20, name: 'Burn' },
             { value: 10, name: 'DAO' },
             { value: 20, name: 'Staking Rewards' },
-            { value: 5, name: 'Team &\nMarketing' },
+            { value: 5, name: 'Team' },
             { value: 45, name: 'Rarity Farming' },
           ],
         },
