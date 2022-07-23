@@ -174,6 +174,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
   },
   header: { connectWallet: 'CONNECT WALLET' },
   nav: {
+    [Routes.landing]: 'Home',
     [Routes.home]: 'Home',
     [Routes.dapp]: 'Dapp',
     [Routes.marketplace]: 'Marketplace',
