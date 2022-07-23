@@ -171,6 +171,30 @@ const locale: WebsiteLocale = new WebsiteLocale({
     partners: {
       title: 'PARTNERS',
     },
+    tokenomics: {
+      title: 'TOKENOMICS',
+      charts: [
+        {
+          title: 'Initial Supply',
+          items: [
+            { value: 300_000, name: 'Seed Sale' },
+            { value: 1_000_000, name: 'DAO' },
+            { value: 1_700_000, name: 'Stake Holders' },
+            { value: 2_000_000, name: 'Presale' },
+          ],
+        },
+        {
+          title: 'Protocol Revenue',
+          items: [
+            { value: 20, name: 'Burn' },
+            { value: 10, name: 'DAO' },
+            { value: 20, name: 'Staking Rewards' },
+            { value: 5, name: 'Team &\nMarketing' },
+            { value: 45, name: 'Rarity Farming' },
+          ],
+        },
+      ],
+    },
   },
   header: { connectWallet: 'CONNECT WALLET' },
   nav: {

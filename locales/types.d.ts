@@ -70,6 +70,10 @@ export interface WebsiteLocaleData {
     partners: {
       title: string
     }
+    tokenomics: {
+      title: string
+      charts: { title: string; items: { value: number; name: string }[] }[]
+    }
   }
   header: {
     connectWallet: string
