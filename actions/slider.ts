@@ -119,6 +119,12 @@ export function movers(): Observable<Event> {
   ).pipe(neutralize)
 }
 
+/**
+ * @description svelte action used to turn the given node into a slider
+ * or just disable translate and read the swipes instead
+ * @emits `slider_status` containing `'start'` or `'end'` indicating if the slider is being dragged or not
+ * @emits `slider_change` containing a tuple with percent on the first element and absolute X coordinates on the second
+ */
 export function slider(
   node: HTMLElement,
   params?: {

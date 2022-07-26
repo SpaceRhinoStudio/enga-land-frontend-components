@@ -1,3 +1,11 @@
+<!--
+  @component
+  this component handles showing some inline data with loading job considerations  
+  content are smoothly animated upon going into loading state and back to normal state
+  @slot `data` - the content to display as data
+  @slot `before` - the content to display before the data/loading content
+  @slot `after` - the content to display after the data/loading content
+ -->
 <script lang="ts">
   import _ from 'lodash'
   import { fly } from 'svelte/transition'
@@ -7,7 +15,16 @@
   import { flip, tsFix } from './helpers/svelte-animation-fix'
 
   export let data: unknown
+  /**
+   * @description whether or not Sentinel should be considered as falsy in the default predicate function
+   * @default false
+   */
   export let passSentinel = false
+  /**
+   * @description a predicate function that indicates if data is solid or in loading state
+   * @returns {boolean} true for valid data, false for loading
+   * @default "if the data (or in case of being a tuple, any member of the tuple) is undefined or Sentinel (in case passSentinel is set to false) then it is considered as loading"
+   */
   export let predicate: (data: unknown) => boolean = e =>
     _.castArray(e).every(e => !_.isUndefined(e) && (!passSentinel ? !isSentinel(e) : true))
   export let className: {

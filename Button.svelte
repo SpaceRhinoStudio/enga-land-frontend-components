@@ -1,19 +1,47 @@
+<!--
+  @component
+  this component is the main button component
+  @slot `default` - the main content of the component
+-->
 <script lang="ts">
   import cn from 'classnames'
   import { pulse } from './actions/pulse'
-
   import { canHover$ } from './helpers/media-queries'
-
   import LoadingOverlay from './LoadingOverlay.svelte'
+
+  /**
+   * @description use active styles
+   * @default false
+   */
   export let active = false
+
+  /**
+   * @description use danger styles
+   * @default false
+   */
   export let danger = false
-  export let isLoading = false
-  let isJobLoading = false
+
+  /**
+   * @description use secondary styles
+   * @default false
+   */
   export let secondary = false
+
+  /** @default false */
+  export let isLoading = false
+
+  /** @default false */
   export let disabled = false
+
+  /**
+   * @description job assigned to on:click, triggers loading status until settled
+   * @required
+   */
   export let job: () => Promise<void> | void
   export let className = ''
   export let style = ''
+
+  let isJobLoading = false
 </script>
 
 <button

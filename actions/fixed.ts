@@ -20,6 +20,13 @@ function mount(node: HTMLElement) {
   }
 }
 
+/**
+ * @description svelte action used to move a node to the fixed root
+ * the reason for this necessity is that the limitations with the containing block creation
+ * long story short applying filter to a parent element will result in breaking the child positioning
+ * this was to fix the fixed header jumping to the start of the start of the document when the blur effect is applied to main content (which contains the fixed header in terms of DOM hierarchy)
+ * https://drafts.fxtf.org/filter-effects/#FilterProperty
+ */
 export function fixed(node: HTMLElement): { destroy: () => void } {
   let destroy: () => void
   function setDestroy() {

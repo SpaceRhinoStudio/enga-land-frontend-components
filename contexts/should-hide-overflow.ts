@@ -1,3 +1,8 @@
+/**
+ * @description storage that indicates if the screen should not scroll at all
+ * used for when user is moving a slider in a touch device, when a modal is open or when the main loading overlay is being shown
+ */
+
 import { delay, map, mergeMap, of, scan, Subject, withLatestFrom, EMPTY, tap } from 'rxjs'
 import { controlStreamPayload } from '../operators/control-stream-payload'
 import { Window$ } from '../observables/window'

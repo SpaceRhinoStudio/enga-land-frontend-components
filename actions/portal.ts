@@ -40,6 +40,11 @@ function mount(node: HTMLElement) {
   }
 }
 
+/**
+ * @description svelte action used to move a node to portal root
+ * used mostly for modal nodes since they need to be in a different DOM hierarchy position than the main content so the blur filter does not apply to them
+ * and to avoid other problems that exist with parents having `filter` and `translate` properties
+ */
 export function portal(node: HTMLElement, params?: { noop?: boolean }): { destroy: () => void } {
   let destroy: () => void
   function setDestroy() {

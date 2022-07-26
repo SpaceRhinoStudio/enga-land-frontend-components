@@ -1,3 +1,7 @@
+<!--
+  @component
+  a single navigation item in the mobile sidebar
+ -->
 <script lang="ts">
   import type { RouteConfig } from './configs/routes'
   import SvgIcon from './SVGIcon.svelte'

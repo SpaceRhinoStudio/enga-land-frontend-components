@@ -1,3 +1,7 @@
+/**
+ * @description a helper function to help use Wobble without getting server side errors and also making a svelte store for the current value of the spring (which is always needed)
+ */
+
 import _ from 'lodash'
 import { onMount } from 'svelte'
 import { Readable, writable } from 'svelte/store'

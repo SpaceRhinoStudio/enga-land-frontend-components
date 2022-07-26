@@ -1,3 +1,8 @@
+/**
+ * @description a helper function to fix the animation bugs happening in svelte because of the way it handles `animate` directive and `transition` directive
+ * long story short svelte is not able to handle the animation properly when it a transition is already in progress and vice versa
+ */
+
 import { AnimationConfig, flip as svelteFlip, FlipParams } from 'svelte/animate'
 import { TransitionConfig } from 'svelte/transition'
 

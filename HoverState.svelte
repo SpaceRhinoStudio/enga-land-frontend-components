@@ -1,14 +1,24 @@
+<!--
+  @component
+  this component keeps track of user hovering the contents  
+  it by default applies a `config.Delays.min` delay for dismissing the hover state
+  @slot `default` - the main content of the component
+  @prop `hoverState`
+  @prop `shouldLeave`
+ -->
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import { config } from './configs'
   import { canHover$ } from './helpers/media-queries'
 
-  let dispatch = createEventDispatcher<{ hover: boolean }>()
-
+  /** @default false */
   export let noDelay = false
-
+  /** @readonly */
   export let hoverState = false
+  /** @readonly */
   export let shouldLeave = false
+
+  let dispatch = createEventDispatcher<{ hover: boolean }>()
 </script>
 
 <div

@@ -1,3 +1,7 @@
+<!--
+  @component
+  this is a helper component to manipulate the timing of actual navigations inside the app to show the main loading overlay for a minimum amount of time that is defined by the `loadingMinDuration` property and causes smoother transitions between pages.
+ -->
 <script context="module" lang="ts">
   export const intro = true
 </script>

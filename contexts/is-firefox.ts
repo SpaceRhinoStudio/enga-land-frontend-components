@@ -1,3 +1,7 @@
+/**
+ * @description observables for indicating the client's browser
+ */
+
 import { Window$ } from '$lib/shared/observables/window'
 import { map, shareReplay } from 'rxjs'
 

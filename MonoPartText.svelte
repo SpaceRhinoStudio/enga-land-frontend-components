@@ -1,3 +1,7 @@
+<!--
+  @component
+  this is a helper component for styling the substrings that are wrapped in backticks (`) to have a monospace font
+ -->
 <script lang="ts">
   import cn from 'classnames'
 

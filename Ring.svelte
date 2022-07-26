@@ -1,3 +1,9 @@
+<!--
+  @component
+  a decorative component showing a ring with a special glow  
+  by default all the styling factors are random  
+  by default the ring randomly moves around
+ -->
 <script lang="ts" context="module">
   function dimensionMul(dimension: string, mul: number): string {
     return dimension
@@ -13,14 +19,21 @@
   import { rnd, rndSign } from './utils/random'
   import RandomTranslate from './RandomTranslate.svelte'
 
+  /** @default false */
   export let noMotion = false
   let className: { [key in 'ring' | 'container']?: string } = {}
   export { className as class }
+  /** @default random */
   export let hue = rnd(0, 360)
+  /** @default random */
   export let saturation = rnd(0.5, 1, true)
+  /** @default random */
   export let lightness = rnd(0.4, 0.8, true)
+  /** @default random */
   export let dimensions = rnd(2.5, 4, true) + 'rem'
+  /** @default random */
   export let thickness = rnd(3, 5) + 'px'
+  /** @default 45 */
   export let shadowHueShift = 45
 
   let spreadMultiplier = rnd(0.2, 0.5, true)
@@ -32,7 +45,8 @@
   ] as const
 </script>
 
-<RandomTranslate maxMove={0.5} className={className.container ?? ''}>
+<!-- TODO: test if maxMove=0 works without problems -->
+<RandomTranslate maxMove={noMotion ? 0 : 0.5} className={className.container ?? ''}>
   <div
     class={cn('rounded-full', className.ring)}
     style="

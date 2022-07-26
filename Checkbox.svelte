@@ -1,3 +1,9 @@
+<!--
+  @component
+  this is a custom checkbox component  
+  this component does not use an <input/> element
+  @slot `default` - the main content of the component
+ -->
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import { fade, scale } from 'svelte/transition'
@@ -8,13 +14,20 @@
   import _ from 'lodash'
   import cn from 'classnames'
 
+  /**
+   * @default false
+   * @lends
+   */
   export let value: boolean | undefined = false
+
+  /** @default false */
   export let isLoading = false
-  const dispatch = createEventDispatcher<{ change: boolean }>()
 
   export let className: {
     [key in 'container' | 'tickWrapper' | 'wrapper' | 'outerWrapper']?: string
   } = {}
+
+  const dispatch = createEventDispatcher<{ change: boolean }>()
 </script>
 
 <div class="contents" on:click={() => void (value = !value)}>

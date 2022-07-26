@@ -1,5 +1,11 @@
 import _ from 'lodash'
 
+const test = 2
+
+/**
+ * @description svelte action used to observe a given element's resizing due to the reflow of the page which happens on page resize and the children content changes
+ * @emits `resize` event with a `Bounds` object that contains the current bounds of the element
+ */
 export function resize_observer(
   node: HTMLElement,
   params?: { noop?: boolean },

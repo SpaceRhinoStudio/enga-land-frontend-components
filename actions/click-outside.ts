@@ -1,3 +1,6 @@
+/**
+ * @description svelte action used to emit `outclick` event when the user clicks outside of the given element
+ */
 export function outclick(node: HTMLElement): { destroy: () => void } {
   const listener = (e: MouseEvent) => {
     if (node && !node.contains(e.target as Node) && !e.defaultPrevented) {

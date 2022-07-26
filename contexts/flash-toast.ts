@@ -1,3 +1,7 @@
+/**
+ * @description the queue of toast messages
+ */
+
 import { Subject } from 'rxjs'
 
 export enum ToastType {

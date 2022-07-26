@@ -1,12 +1,20 @@
+<!--
+  @component
+  the children of this component will follow the user pointer
+  @slot `default` - the main content of the component
+ -->
+<script lang="ts" context="module">
+  function computeOpacity(full: number | undefined, current: number | undefined): number {
+    return Math.abs(1 - Math.abs((full ?? 0) / 2 - (current ?? 0)) / (((full ?? 1) * 1) / 2))
+  }
+</script>
+
 <script lang="ts">
   import _ from 'lodash'
   import { canHover$ } from './helpers/media-queries'
   import { useWobble } from './helpers/wobble-svelte'
 
-  function computeOpacity(full: number | undefined, current: number | undefined): number {
-    return Math.abs(1 - Math.abs((full ?? 0) / 2 - (current ?? 0)) / (((full ?? 1) * 1) / 2))
-  }
-
+  /** @default true */
   export let fadeOutAtEdge = true
 
   let viewportHeight: number = 0

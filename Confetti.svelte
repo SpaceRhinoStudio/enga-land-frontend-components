@@ -1,15 +1,20 @@
+<!--
+  @component
+  throw confetties and celebrate the success
+ -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { fixed } from './actions/fixed'
   import { portal } from './actions/portal'
-
   import { Confetto, Sequin } from './classes/confetti'
 
   export let offsetWidth: number
   export let offsetHeight: number
-
+  /** @default 20 */
   export let confettiCount = 20
+  /** @default 10 */
   export let sequinCount = 10
+
   onMount(() => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement
     const ctx = canvas.getContext('2d')

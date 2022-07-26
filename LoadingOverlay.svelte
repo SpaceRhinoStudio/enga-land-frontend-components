@@ -1,3 +1,8 @@
+<!--
+  @component
+  this is an overlay component that is used to show a loading state while a job is running  
+  parent should have a `relative` position
+ -->
 <script lang="ts">
   import { fade } from 'svelte/transition'
   import LoadingSpinner from './LoadingSpinner.svelte'

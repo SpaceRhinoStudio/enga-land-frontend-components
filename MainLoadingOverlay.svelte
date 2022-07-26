@@ -1,3 +1,7 @@
+<!--
+  @component
+  main loading overlay that blocks all the content until all loading jobs are settled
+ -->
 <script context="module" lang="ts">
   export const intro = true
 </script>

@@ -1,3 +1,7 @@
+<!--
+  @component
+  Enga special theme loading spinner component
+ -->
 <script lang="ts">
   export let className = ''
 </script>

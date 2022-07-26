@@ -1,3 +1,9 @@
+<!--
+  @component
+  footer component
+  @slot `metadata` - small metadata that is shown on the right of the first row
+  @slot `foot` - small content that is shown on the right of the copyright label in the bottom row
+ -->
 <script lang="ts">
   import SvgIcon from './SVGIcon.svelte'
   import Logo from './assets/EngalandLogo.svg'
@@ -7,16 +13,15 @@
   import cn from 'classnames'
 
   export let routes: Routes[]
+  export let clientHeight: number
+  export let style = ''
+  /** @default false */
+  export let small = false
 
   $: routeConfigs = routes.map(x => routeConfig[x])
   const socials = [Routes.telegram, Routes.twitter, Routes.discord, Routes.reddit].map(
     x => routeConfig[x],
   )
-
-  export let clientHeight: number
-  export let style = ''
-
-  export let small = false
 </script>
 
 <footer

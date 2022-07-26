@@ -1,3 +1,13 @@
+<!--
+  @component
+  the main wrapper for any content displayed in the application  
+  this component is meant to render only once as it is meant to be used as a root component and it handles the initialization of different parts of the application
+  @slot `default` - the main content of the screen
+  @slot `header-right` passed to the `right` slot of the header component
+  @slot `sidebar-foot` passed to the `sidebar-foot` slot of the header component
+  @slot `footer-foot` passed to `foot` slot of the footer component
+  @slot `footer-metadata` passed to `metadata` slot of the footer component
+ -->
 <script context="module" lang="ts">
   export const intro = true
   export const backdropStyle = Symbol()

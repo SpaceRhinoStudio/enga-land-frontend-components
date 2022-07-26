@@ -28,6 +28,11 @@ function removeTransition(node: HTMLElement) {
     .join(', ')
 }
 
+/**
+ * @description svelte action to monitor drags (swipes) on both pointer and touch for the given node
+ * the node will move along with the swipe
+ * @emits `swipe_dismiss` with a value of either `'left'` or `'right'` if the swipe goes beyond the threshold of one third of the node width
+ */
 export function swipe_to_dismiss(node: HTMLElement): { destroy: () => void } {
   const hasDismissed = { current: false }
 

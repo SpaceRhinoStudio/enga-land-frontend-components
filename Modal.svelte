@@ -1,3 +1,11 @@
+<!--
+  @component
+  wrapper component for every modal used in the application  
+  this component automatically handles multiple modals on top of each other and blurs all modals that aren't on top  
+  content is aligned to center for `sm` screen and to bottom for smaller screens
+  @slot `default` - the main content of the modal
+  @prop `isOpen`
+ -->
 <script lang="ts">
   import { createEventDispatcher, onDestroy } from 'svelte'
   import { fade, fly } from 'svelte/transition'
@@ -6,13 +14,27 @@
   import { useWobble } from './helpers/wobble-svelte'
   import { shouldHideOverflowController$ } from './contexts/should-hide-overflow'
 
+  /** @lends */
   export let isOpen = false
+  /**
+   * @description accept exit when clicking outside the modal
+   * @default false
+   */
   export let acceptExit = false
+  /** @readonly */
   export const toggle = () => {
     isOpen = !isOpen
   }
+  /**
+   * @description wether the modal is animated from left or down (default)
+   * @default false
+   */
   export let animateWidth = false
   export let className: { [key in 'bg']?: string } = {}
+  /**
+   * @description whether or not the wrapper should have the full screen width
+   * @default false
+   */
   export let neverFullWidth = false
 
   const dispatch = createEventDispatcher<{ requestExit: true }>()

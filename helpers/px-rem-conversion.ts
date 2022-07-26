@@ -1,3 +1,8 @@
+/**
+ * @description this file presents a storage that stores the px to rem ratio of the viewport
+ * this is used to convert rem units to px in case they're needed
+ */
+
 import { Window$ } from '../observables/window'
 import {
   fromEvent,

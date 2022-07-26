@@ -1,3 +1,13 @@
+<!--
+  @component
+  a helper component for links, handles hoover effects on text  
+  has states for exact route match and partial route match  
+  etc
+  @emits `click` - when the link is clicked
+  @
+  @slot `default` - the main content of the component
+  @prop `match: { partial: boolean, exact: boolean }`
+ -->
 <script lang="ts">
   import { goto } from '$app/navigation'
   import { page } from '$app/stores'
@@ -5,13 +15,19 @@
   import { createEventDispatcher } from 'svelte'
   import { routeMatch, RouteMatchResult } from './helpers/route-match'
 
+  /**
+   * @description the HTML element to use for the container
+   * @default "a"
+   */
   export let element = 'a'
   export let href: string | RegExp | undefined
+  /** @default false */
   export let disabled = false
+  /** @default false */
+  export let newTab = false
   export let className: {
     [key in 'element' | 'exactMatch' | 'partialMatch' | 'text' | 'textEnabled']?: string
   } = {}
-  export let newTab = false
 
   const dispatch = createEventDispatcher<{ click: MouseEvent }>()
   let match: RouteMatchResult = { partial: false, exact: false }

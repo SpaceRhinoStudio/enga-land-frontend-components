@@ -1,3 +1,13 @@
+<!--
+  @component
+  this component wraps potentially scrollable content and shows the scrolling hints or buttons (depending on preferences) for navigation  
+  the container of this component is expected to have fixed width and or height depending on the direction of the scroll (horizontal or vertical)
+  @emits `next` - when navigation buttons scrolls toward end of content
+  @emits `prev` - when navigation buttons scrolls toward start of content
+  @emits `top` - when navigation buttons scrolls to the top of content
+  @
+  @slot `default` - the content to display in the wrapper
+ -->
 <script lang="ts">
   import SvgIcon from './SVGIcon.svelte'
   import ScrollTopIcon from './assets/icons/vuesax-linear-arrow-up-3.svg'
@@ -13,9 +23,46 @@
     [key in 'wrapper' | 'innerWrapper' | 'container' | 'hint' | 'button']?: string
   } = {}
 
+  /**
+   * @description whether or not to have a button that scrolls to top (only if scroll direction is vertical)
+   * @default false
+   */
   export let goToTopButton: boolean = false
+  /**
+   * @description threshold to hide the hints (in pixels)
+   * @default 40
+   */
   export let hideThreshold: number = 40
+  /**
+   * @description object value can be partial
+   */
   export let hintDownscaleFactor: { start?: number; end?: number } = {}
+
+  /**
+   * @description whether or not to have buttons for horizontal scrolling
+   * @default false
+   */
+  export let horizontalScrollButtons: boolean = false
+  /**
+   * @description the direction in which the content should be scrolled
+   * @default 'both'
+   */
+  export let mode: 'vertical' | 'horizontal' | 'both' = 'both'
+
+  /** @readonly */
+  export let scroll = { top: 0, left: 0 }
+
+  /**
+   * @description whether or not the scroll snapping should be centered
+   * @default false
+   */
+  export let snapCenter = false
+  /**
+   * @description whether or not to show scroll helper buttons if the device is touch (by default they only appear on non-touch devices)
+   * @default false
+   */
+  export let alwaysShowButtons = false
+
   $: {
     if (_.isUndefined(hintDownscaleFactor.start)) {
       hintDownscaleFactor = { ...hintDownscaleFactor, start: 4 }
@@ -24,8 +71,6 @@
       hintDownscaleFactor = { ...hintDownscaleFactor, end: 4 }
     }
   }
-  export let horizontalScrollButtons: boolean = false
-  export let mode: 'vertical' | 'horizontal' | 'both' = 'both'
 
   let outerRef: HTMLElement | undefined
 
@@ -50,11 +95,6 @@
     paddingX: 0,
     paddingY: 0,
   }
-
-  export let scroll = { top: 0, left: 0 }
-
-  export let snapCenter = false
-  export let alwaysShowButtons = false
 
   const dispatch = createEventDispatcher<{ change: 'next' | 'prev' | 'top' }>()
 </script>

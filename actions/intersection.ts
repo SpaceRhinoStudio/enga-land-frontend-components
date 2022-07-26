@@ -1,5 +1,8 @@
 import _ from 'lodash'
 
+/**
+ * @description svelte action used to determine the status of user viewport intersection with the given element by emitting `intersection` event that contains a boolean value
+ */
 export function intersection(
   node: HTMLElement,
   args?: { threshold?: number; offset?: number },

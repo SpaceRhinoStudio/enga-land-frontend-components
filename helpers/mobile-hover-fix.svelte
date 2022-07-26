@@ -1,6 +1,9 @@
-<script lang="ts">
-  import { onMount } from 'svelte'
-
+<!--
+  @component
+  this is a helper component to run a script that replaces all the `hover` pseudo classes with the `active` pseudo class in devices that don't have the ability to hover (does not have a precise pointer)  
+  this component is only meant to be rendered once throughout the whole application
+ -->
+<script lang="ts" context="module">
   function replaceStyleSelector(searchValue: string, replaceValue: string) {
     for (let sheetIndex = document.styleSheets.length - 1; sheetIndex >= 0; sheetIndex--) {
       let sheet: CSSStyleSheet | null = null
@@ -38,6 +41,10 @@
       replaceStyleSelector(':hover', ':not(:not(:active))')
     }
   }
+</script>
+
+<script lang="ts">
+  import { onMount } from 'svelte'
 
   onMount(() => {
     window.addEventListener('load', () => {

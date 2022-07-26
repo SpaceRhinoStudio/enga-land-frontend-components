@@ -1,3 +1,11 @@
+<!--
+  @component
+  toast notification container that reads the toast queue and displays them in the bottom right of the screen  
+  toasts can be dragged to sides to be dismissed earlier than their timeout  
+  toasts have a slider on bottom that indicates the time that is left for the toast to leave  
+  toasts appear and disappear with animations  
+  this component is a singleton and is not meant to be rendered more than once
+ -->
 <script lang="ts" context="module">
   const levelClassNames: { [key in ToastType]: string } = {
     [ToastType.alert]: 'bg-blue-500',

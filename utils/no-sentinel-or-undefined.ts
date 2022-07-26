@@ -1,3 +1,7 @@
+/**
+ * @description a set of type safe filter predicates for empty / falsy values
+ */
+
 import { SENTINEL, type Sentinel } from '$lib/shared/contexts/empty-sentinel'
 import _ from 'lodash'
 import type { NonUndefinable } from '$lib/types'

@@ -11,6 +11,9 @@ function selectOrSentinel<Action extends keyof Payloads, Payloads extends _.Dict
   return (action in x ? x[action] : SENTINEL) as ValueTypeOfKey<Payloads, Action> | Sentinel
 }
 
+/**
+ * @description this operator is used to extract the payload of certain actions from a control stream observable
+ */
 export function controlStreamPayload<
   Action extends keyof Payloads,
   Payloads extends _.Dictionary<unknown>,

@@ -1,3 +1,7 @@
+/**
+ * @description a set of helper functions to generate promises that can be used to wait for a certain timeout / animationFrame execution
+ */
+
 export async function waitFor(timeout: number): Promise<void> {
   return new Promise<void>(resolve => {
     setTimeout(() => {

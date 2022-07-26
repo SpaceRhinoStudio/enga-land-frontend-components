@@ -1,3 +1,7 @@
+/**
+ * @description a helper function for indicating the matching status of a route to pathname in the browser
+ */
+
 import _ from 'lodash'
 
 export type RouteMatchResult = {

@@ -1,3 +1,7 @@
+<!--
+  @component
+  this is the single item for toast notifications
+ -->
 <script lang="ts">
   import { ToastType } from '../contexts/flash-toast'
   import { __$ } from '../locales'
@@ -5,6 +9,7 @@
   import { onMount } from 'svelte'
 
   export let message: string
+  /** @default alert */
   export let level: ToastType = ToastType.alert
   export let timeout: number
 

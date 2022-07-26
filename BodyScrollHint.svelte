@@ -1,3 +1,7 @@
+<!--
+  @component
+  this component is used to display a hint to the user that they can scroll the page to see more content
+-->
 <script lang="ts">
   import SvgIcon from './SVGIcon.svelte'
   import ScrollTopIcon from './assets/icons/vuesax-linear-arrow-up-3.svg'
@@ -11,9 +15,17 @@
   export let className: {
     [key in 'hint' | 'button']?: string
   } = {}
-
+  /**
+   * @description hide threshold in pixels
+   * @default 200
+   */
   export let hideThreshold: number = 200
+  /**
+   * @description object value can be partial
+   */
   export let hintDownscaleFactor: { start?: number; end?: number } = {}
+  export let floatingHeader: boolean
+
   $: {
     if (_.isUndefined(hintDownscaleFactor.start)) {
       hintDownscaleFactor = { ...hintDownscaleFactor, start: 4 }
@@ -28,8 +40,6 @@
   const [_scrollTop, setScrollTop] = useWobble({ damping: 1000, stiffness: 5, mass: 0.1 })
   const scrollTop = derived(_scrollTop, x => (x < 0 ? 0 : x))
   $: setScrollTop(scrollY ?? 0)
-
-  export let floatingHeader: boolean
 </script>
 
 <svelte:body use:resize_observer on:resize={() => (scrollHeight = document.body.scrollHeight)} />

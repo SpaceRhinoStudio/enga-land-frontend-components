@@ -1,3 +1,7 @@
+/**
+ * @description a set of utility functions for random stuff
+ */
+
 import _ from 'lodash'
 import { keysOf } from './type-safe'
 
@@ -35,6 +39,9 @@ export function rndPick<T>(arr: T[], length: number): T[] {
   return _.values(_.pick(arr, ...rndUnique(arr.length, length)))
 }
 
+/**
+ * @description to be only used with identity enums, the ones that all the keys match their respected values exactly
+ */
 export function rndEnum<T>(target: Record<string | number, T>): T {
   return target[rndElm(keysOf(target))]!
 }

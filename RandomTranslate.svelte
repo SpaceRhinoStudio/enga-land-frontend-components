@@ -1,3 +1,8 @@
+<!--
+  @component
+  this component randomly moves the contents with the given spring config and limits  
+  by default `mass` argument of the spring config is defined by how big the content is (width + height)
+ -->
 <script lang="ts" context="module">
   const calc = (maxMove: number) => (max: number) => (curr: number) => {
     let rand = (Math.random() - 0.5) * (max * maxMove)
@@ -32,23 +37,47 @@
   import _ from 'lodash'
   import { Spring, SpringConfig } from 'wobble'
 
+  /**
+   * @description maximum amount of movement relative to the content size
+   * @default 1
+   */
   export let maxMove = 1
+  /**
+   * @description maximum amount of rotation relative 360 degrees
+   * @default 1
+   */
   export let maxRotate = 1
+  /** @default 1 */
   export let massMultiplier = 1
+  /** @default false */
   export let rotate = false
 
   let width: number = 0
   let height: number = 0
-  export { width as clientWidth }
-  export { height as clientHeight }
+  export {
+    /** @readonly */
+    width as clientWidth,
+  }
+  export {
+    /** @readonly */
+    height as clientHeight,
+  }
 
   export let config: Partial<SpringConfig> = {}
 
   const [x, setX, springX] = useWobble(config)
   const [y, setY, springY] = useWobble(config)
   const [r, setR, springR] = useWobble(config)
+  export {
+    /** @description current X offset */
+    x as x,
+    /** @description current Y offset */
+    y as y,
+    /** @description current rotation in degrees */
+    r as r,
+  }
 
-  export { x, y, r }
+  export let className: string = ''
 
   onMount(() => {
     if (config.mass === undefined) {
@@ -74,8 +103,6 @@
       }
     })
   })
-
-  export let className: string = ''
 </script>
 
 <div

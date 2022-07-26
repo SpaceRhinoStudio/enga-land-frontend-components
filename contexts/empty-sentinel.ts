@@ -1,3 +1,7 @@
+/**
+ * @description A sentinel value that can be used to indicate that a value is not present.
+ */
+
 export const SENTINEL: unique symbol = Symbol('empty-value-sentinel')
 export type Sentinel = typeof SENTINEL
 

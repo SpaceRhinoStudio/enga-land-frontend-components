@@ -1,3 +1,9 @@
+<!--
+  @component
+  header component
+  @slot `right` content to be placed on the right end of the header
+  @slot `sidebar-foot` content to be placed at the bottom of the sidebar
+ -->
 <script lang="ts">
   import { routeConfig, Routes } from './configs/routes'
   import Link from './Link.svelte'
@@ -20,23 +26,40 @@
   import { readable } from 'svelte/store'
   import { canHover$ } from './helpers/media-queries'
 
+  /**
+   * @description routes to be shown in the main navbar
+   * @required
+   */
+  export let routes: Routes[]
+  /**
+   * @description routes to be displayed in the three dot menu
+   * @required
+   */
+  export let collapsedRoutes: Routes[]
+  /**
+   * @description routes to be displayed in the mobile sidebar menu
+   */
+  export let sidebarRoutes: Routes[]
+  /** @default false */
+  export let small = false
+  /**
+   * @description blur container instead of inner content
+   * @default false
+   */
+  export let blurContainer = false
+  export let className: {
+    [key in 'container' | 'wrapper' | 'navDropContainer' | 'navDropItem']?: string | undefined
+  } = {}
+
   let isPreview = false
   $: isPreview =
     _.values(config.routeConfig).find(x => routeMatch(x.href, $page.url.pathname).exact)?.preview ??
     false
-  export let routes: Routes[]
   $: routeConfigs = routes.map(x => routeConfig[x])
-  export let collapsedRoutes: Routes[]
-  export let sidebarRoutes: Routes[]
 
   let isOpen = false
 
-  export let small = false
-  export let className: {
-    [key in 'container' | 'wrapper' | 'navDropContainer' | 'navDropItem']?: string | undefined
-  } = {}
   $: blur = getContext<BackdropStyleContext>(backdropStyle)?.blur ?? readable(0)
-  export let blurContainer = false
 </script>
 
 <header

@@ -1,3 +1,7 @@
+/**
+ * @description a set of helper functions to bring media queries and screen matching into javascript
+ */
+
 import { config } from '../configs'
 import { Window$ } from '../observables/window'
 import type { Screens } from '../types'

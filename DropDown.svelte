@@ -1,19 +1,34 @@
+<!--
+  @component
+  a dropdown menu component that works with both hover and click
+  @slot `default` - the main content of the component
+  @prop `dismiss` function
+  @prop `isDropped` boolean
+  @
+  @slot `drop`
+  @prop `dismiss` function
+ -->
 <script lang="ts">
   import cn from 'classnames'
   import { fade, type FadeParams, slide, type SlideParams } from 'svelte/transition'
   import { portal } from './actions/portal'
   import { resize_observer } from './actions/resize-observer'
-
   import ClickState from './ClickState.svelte'
   import { isSafari$ } from './contexts/is-firefox'
   import HoverState from './HoverState.svelte'
 
+  /** @default false */
   export let upward: boolean = false
   export let className: { [key in 'container' | 'dropContainer' | 'dropWrapper']?: string } = {}
+  /** @default true */
   export let canExpand = true
+  /** @default ltr */
   export let dir: 'ltr' | 'rtl' = 'ltr'
+  /** @default false */
   export let noSlide = false
+  /** @default false */
   export let noHover = false
+  /** @default false */
   export let usePortal = false
 
   let shouldLeave = false

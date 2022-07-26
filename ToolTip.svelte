@@ -1,8 +1,20 @@
+<!--
+  @component
+  a tooltip component that by default stays at top-center of the parent element  
+  parent element's position must be set to `relative`
+  @slot `default` - the contents of the tooltip
+ -->
 <script lang="ts">
   import cn from 'classnames'
   import { fade, FadeParams } from 'svelte/transition'
+
+  // TODO: add support for different directions
+
   export let className: { [key in 'class' | 'position']?: string } = {}
   export let style = ''
+  /**
+   * @description svelte fade transition parameters if you need to override them
+   */
   export let fadeParams: FadeParams = {}
 </script>
 

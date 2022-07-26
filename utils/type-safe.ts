@@ -1,3 +1,7 @@
+/**
+ * @description a set of utilities that can be used to type-safely do the everyday things
+ */
+
 import { isSentinel, type Sentinel } from '../contexts/empty-sentinel'
 import _ from 'lodash'
 import type { Nil } from '../types'

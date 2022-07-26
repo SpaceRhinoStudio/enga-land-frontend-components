@@ -20,6 +20,11 @@ function mount(node: HTMLElement) {
   }
 }
 
+/**
+ * @description svelte action used to move a node to the backdrop root
+ * the reason for this necessity is that the limitations with backdrop-filter source of sampling for the backdrop effects
+ * https://drafts.fxtf.org/filter-effects-2/#BackdropRoot
+ */
 export function backdrop(node: HTMLElement): { destroy: () => void } {
   let destroy: () => void
   function setDestroy() {

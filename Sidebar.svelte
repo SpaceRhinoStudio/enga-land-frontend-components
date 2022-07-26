@@ -1,3 +1,8 @@
+<!--
+  @component
+  mobile sidebar component
+  @slot `foot` - the content to display at the very bottom of the sidebar
+ -->
 <script lang="ts">
   import { config } from './configs'
   import { Routes } from './configs/routes'
@@ -10,9 +15,10 @@
   import SidebarNavItem from './SidebarNavItem.svelte'
 
   export let routes: Routes[]
-  $: routeConfigs = routes.map(x => config.routeConfig[x])
-
+  /** @lends */
   export let isOpen = false
+
+  $: routeConfigs = routes.map(x => config.routeConfig[x])
 </script>
 
 <Modal animateWidth neverFullWidth className={{ bg: '!items-start' }} acceptExit bind:isOpen>
