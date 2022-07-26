@@ -63,7 +63,7 @@
   onMount(() => {
     if (container) {
       if (!chart) {
-        chart = init(container, 'dark')
+        chart = init(container, 'dark', { renderer: 'svg' })
       }
     }
   })
