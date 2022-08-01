@@ -19,6 +19,6 @@ export function isEqual<T, S>(a: T, b: S): boolean {
   return _.isEqual(a, b)
 }
 
-export function isArray<T, S>(x: readonly T[] | S): x is readonly T[] {
+export function isArray<T extends readonly unknown[], S>(x: T | S): x is T {
   return Array.isArray(x)
 }
