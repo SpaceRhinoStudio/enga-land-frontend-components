@@ -21,3 +21,17 @@ export type TimeUnit = 's' | 'm' | 'h' | 'd' | 'y'
 export type NonUndefinable<T> = T extends undefined ? never : T
 
 export type Nil = null | undefined
+
+const SKIP = Symbol('SKIP')
+export type Skip = typeof SKIP
+
+export type Last<A extends readonly unknown[]> = (readonly [Skip, ...A])[A['length']]
+
+export type Prev<A extends readonly unknown[], Fallback, K extends keyof A> = (readonly [
+  Fallback,
+  ...A,
+])[K]
+
+export type OperatorsTuple<T, A extends readonly unknown[]> = {
+  [P in keyof A]: OperatorFunction<Prev<A, T, P>, A[P]>
+}
