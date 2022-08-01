@@ -14,7 +14,7 @@ import { EndroSortOptions, MarketplaceSortOptions } from '../types/marketplace'
 const locale: WebsiteLocale = new WebsiteLocale({
   main: {
     helloWorld: 'hello world!',
-    genericErrorMessage: 'something went wrong',
+    genericErrorMessage: 'Something went wrong',
     unknown: 'unknown!',
     done: 'done!',
     noItem: 'Nothing to show...',
@@ -321,6 +321,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
       lowerThanMinimum: min => `Should be higher than ${min}`,
       cannotRemoveAgreement: 'You cannot take back your agreement',
       shouldAgree: 'You need to accept terms and conditions',
+      kyc: 'You are not authorized to participate in this sale, please complete your KYC',
     },
   },
   marketplace: {

@@ -159,6 +159,7 @@ export interface WebsiteLocaleData {
       lowerThanMinimum: (min: string) => string
       cannotRemoveAgreement: string
       shouldAgree: string
+      kyc: string
     }
   }
   marketplace: {
