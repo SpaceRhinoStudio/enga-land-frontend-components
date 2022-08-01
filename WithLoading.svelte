@@ -28,7 +28,7 @@
   export let predicate: (data: unknown) => boolean = e =>
     _.castArray(e).every(e => !_.isUndefined(e) && (!passSentinel ? !isSentinel(e) : true))
   export let className: {
-    [key in 'container' | 'wrapper' | 'spinner' | 'spinnerWrapper']?: string
+    [key in 'container' | 'wrapper' | 'spinnerWrapper']?: string
   } = {}
 
   const before = $$slots.before ? ['before'] : []
@@ -70,7 +70,7 @@
       {/if}
       {#if key === 'loading'}
         <div class={className.spinnerWrapper ?? ''}>
-          <LoadingSpinner className={className.spinner ?? ''} />
+          <LoadingSpinner />
         </div>
       {/if}
       {#if key === 'data'}
