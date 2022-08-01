@@ -19,7 +19,7 @@
 
   /** @default false */
   export let upward: boolean = false
-  export let className: { [key in 'container' | 'dropContainer' | 'dropWrapper']?: string } = {}
+  export let className: { [key in 'container' | 'dropContainer']?: string } = {}
   /** @default true */
   export let canExpand = true
   /** @default ltr */
