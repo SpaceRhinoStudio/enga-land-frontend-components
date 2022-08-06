@@ -1,5 +1,5 @@
 import { isSentinel, Sentinel, SENTINEL } from '../contexts/empty-sentinel'
-import { filter, map, type OperatorFunction } from 'rxjs'
+import { filter, map, MonoTypeOperatorFunction, Subject, tap, type OperatorFunction } from 'rxjs'
 import { noSentinel } from '../utils/no-sentinel-or-undefined'
 import _ from 'lodash'
 import type { ValueTypeOfKey } from '../types'
@@ -94,4 +94,10 @@ export function controlStreamPayload<
       }),
       filter(noSentinel),
     )
+}
+
+export function setLoadingFor<Payloads extends { Loading?: boolean }>(
+  control$: Subject<Partial<Payloads>>,
+): <T>(state: boolean) => MonoTypeOperatorFunction<T> {
+  return state => tap(() => control$.next({ Loading: state } as Partial<Payloads>))
 }
