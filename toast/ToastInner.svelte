@@ -7,6 +7,7 @@
   import { __$ } from '../locales'
   import cn from 'classnames'
   import { onMount } from 'svelte'
+  import { split } from 'lodash'
 
   export let message: string
   /** @default alert */
@@ -21,12 +22,16 @@
 
 <div
   class={cn(
-    'py-3 px-5 space-y-2 flex flex-col items-start md:flex-row md:space-y-0 md:space-x-3 md:items-center md:py-5 ',
+    'text-text-hover py-3 px-5 space-y-2 flex flex-col items-start md:flex-row md:space-y-0 md:space-x-3 md:items-center md:py-5 ',
   )}>
-  <span class="rounded-lg bg-white bg-opacity-20 text-text-hover px-2 py-1 text-sm flex">
+  <span class="rounded-lg bg-white bg-opacity-20 px-2 py-1 text-sm flex">
     {$__$?.userInteraction.toastTitles[level]}
   </span>
-  <span class="">{message}</span>
+  <div class="">
+    {#each message.split('\n') as line}
+      <p class="">{line}</p>
+    {/each}
+  </div>
 </div>
 <div class="absolute -bottom-1 left-0 right-0 !m-0">
   <div
