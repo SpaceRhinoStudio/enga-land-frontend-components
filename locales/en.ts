@@ -230,6 +230,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
     [Routes.mpPurchases]: 'My Purchases',
     [Routes.mpEndroSingle]: 'Single Endro',
     [Routes.opifex]: 'Opifex Machine',
+    [Routes.blog]: 'Blog',
     notFound: "You're Lost!",
   },
   userInteraction: {
