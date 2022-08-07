@@ -29,6 +29,7 @@ import MPListingsIcon from '../assets/icons/marketplace-listings.svg'
 import MPSalesIcon from '../assets/icons/marketplace-sales.svg'
 import MPPurchasesIcon from '../assets/icons/marketplace-purchases.svg'
 import MPSkinsIcon from '../assets/icons/vuesax-linear-magic-star.svg'
+import BlogIcon from '../assets/icons/vuesax_linear_book-2.svg'
 
 export enum Routes {
   'landing' = 'landing',
@@ -36,6 +37,7 @@ export enum Routes {
   'dapp' = 'dapp',
   'marketplace' = 'marketplace',
   'help' = 'help',
+  'blog' = 'blog',
   'aboutUs' = 'aboutUs',
   'dashboard' = 'dashboard',
   'staking' = 'staking',
@@ -86,6 +88,12 @@ const href = {
 export const routeConfig: {
   [key in Routes]: RouteConfig
 } = {
+  [Routes.blog]: {
+    id: Routes.blog,
+    href: 'https://medium.com/@engaland',
+    icon: BlogIcon,
+    disabled: false,
+  },
   [Routes.landing]: {
     id: Routes.landing,
     href: href.landing('/'),
