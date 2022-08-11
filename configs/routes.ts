@@ -80,9 +80,14 @@ export type RouteConfig = {
 
 const isLanding = import.meta.env.VITE_IS_LANDING === 'true'
 
+export enum DOMAINS {
+  DAPP_DOMAIN = 'https://app.enga.land',
+  LANDING_DOMAIN = 'https://enga.land',
+}
+
 const href = {
-  dapp: (href: string) => (isLanding ? 'https://app.enga.land' : '') + href,
-  landing: (href: string) => (isLanding ? '' : 'https://enga.land') + href,
+  dapp: (href: string) => (isLanding ? DOMAINS.DAPP_DOMAIN : '') + href,
+  landing: (href: string) => (isLanding ? '' : DOMAINS.LANDING_DOMAIN) + href,
 }
 
 export const routeConfig: {

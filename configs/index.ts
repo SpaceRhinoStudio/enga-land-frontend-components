@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { routeConfig } from './routes'
+import { DOMAINS, routeConfig } from './routes'
 
 export const config = {
   Delays: {
@@ -99,6 +99,7 @@ export const config = {
   },
   Web3ProviderIdCacheKey: 'web3-provider-id-cache',
   routeConfig,
-  ENGAIconUrl: 'https://enga.land/assets/images/enga-token-logo/enga-token-logo.jpg',
+  DOMAINS,
+  ENGAIconUrl: '/public/enga-token-logo.jpg',
   logQueryMaximumBlockRange: 5000,
 }
