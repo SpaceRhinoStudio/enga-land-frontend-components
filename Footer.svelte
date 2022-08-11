@@ -11,6 +11,7 @@
   import { __$ } from './locales'
   import { routeConfig, Routes } from './configs/routes'
   import cn from 'classnames'
+  import { screen$ } from './helpers/media-queries'
 
   export let routes: Routes[]
   export let clientHeight: number
@@ -35,43 +36,53 @@
         : 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.2xl))]',
       'w-screen relative',
     )}>
-    <div class="container flex flex-wrap items-center justify-between mx-auto">
+    <div class="container flex flex-col py-10 md:py-8 gap-12">
       <nav
-        class="sm:gap-6 w-full text-text-primary flex flex-wrap items-center justify-between md:justify-center px-3 mx-auto md:px-0 pt-8">
-        <Link href="/" className={{ element: 'md:ml-5' }}>
-          <SvgIcon Icon={Logo} width={'6.8rem'} height={'3.1rem'} dontFill />
-        </Link>
-        <span class="md:order-last">
-          <slot name="metadata" />
-        </span>
+        class="gap-12 md:gap-8 flex flex-col sm:items-center md:flex-row justify-between px-3 md:px-0">
+        <div class="flex justify-between sm:w-full sm:max-w-xl md:w-fit">
+          <Link
+            href={routeConfig[Routes.landing].href}
+            className={{ element: 'md:px-8 #-hue-rotate-[140deg] #opacity-75' }}>
+            <SvgIcon
+              Icon={Logo}
+              width={'6.8rem'}
+              height={'3.1rem'}
+              dontFill
+              className="#sepia #brightness-50" />
+          </Link>
+          {#if $screen$.isMobile}
+            <slot name="metadata" />
+          {/if}
+        </div>
         <div
-          class="flex flex-wrap basis-auto grow-1 items-center flex-1 md:ml-12 mt-14 md:mt-0 md:px-0 px-5">
+          class="grid grid-cols-2 sm:grid-cols-3 max-w-md md:max-w-none pl-6 md:pl-0 gap-x-12 gap-y-6 sm:gap-y-10 md:flex md:flex-wrap md:gap-x-8 md:gap-y-4 md:grow md:items-center sm:text-center">
           {#each routeConfigs as x}
-            <div class="mb-9 md:mb-0 mr-4">
+            <div class="">
               <Link
                 href={x.href}
                 disabled={x.disabled}
                 className={{
-                  element: 'm-2 text-lg text-text-secondary',
+                  element: 'text-lg text-text-secondary',
                 }}>
                 {$__$?.nav[x.id]}
               </Link>
             </div>
           {/each}
         </div>
+        {#if !$screen$.isMobile}
+          <slot name="metadata" />
+        {/if}
       </nav>
-      <div
-        class="flex w-full items-center justify-between md:flex-row flex-col-reverse md:pt-12 pt-6 pb-8">
-        <div
-          class="flex flex-col md:flex-row items-center justify-center md:gap-6 md:space-y-0 space-y-6">
-          <p class="m-0 text-center text-text-secondary">
-            2022
-            <span class="text-white ml-2">Space Rhino Studio</span>
+      <div class="flex items-center justify-between md:gap-8 gap-12 md:flex-row flex-col-reverse">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+          <p class="text-center text-text-secondary flex gap-3">
+            <span> 2022 </span>
+            <span class="text-white">Space Rhino Studio</span>
           </p>
           <slot name="foot" />
         </div>
         <div>
-          <div class="flex items-center justify-between flex-wrap md:mb-0 mb-8 gap-5">
+          <div class="flex items-center justify-between flex-wrap md:gap-5 gap-8">
             {#each socials as x}
               <div>
                 <Link
