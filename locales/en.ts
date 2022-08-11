@@ -275,6 +275,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
     [Web3ProviderId.binanceChain]: 'Binance Chain',
     [Web3ProviderId.trust]: 'Trust',
     [Web3ProviderId.safePal]: 'Safepal',
+    [Web3ProviderId.walletConnect]: 'WalletConnect',
   },
   presale: {
     stillPending: 'There is no sale going on right now...',
