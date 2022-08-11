@@ -3,7 +3,7 @@
   this is the single item for toast notifications
  -->
 <script lang="ts">
-  import { ToastType } from '../contexts/flash-toast'
+  import { ToastLevel } from '../contexts/flash-toast'
   import { __$ } from '../locales'
   import cn from 'classnames'
   import { onMount } from 'svelte'
@@ -11,7 +11,7 @@
 
   export let message: string
   /** @default alert */
-  export let level: ToastType = ToastType.alert
+  export let level: ToastLevel = ToastLevel.ALERT
   export let timeout: number
 
   let startTimer = false
@@ -34,6 +34,7 @@
   </div>
 </div>
 <div class="absolute -bottom-1 left-0 right-0 !m-0">
+  <!-- TODO: cahnge animation to use scale instead of width -->
   <div
     class="h-2 bg-white transition-all ease-linear {startTimer ? 'w-0' : 'w-full'}"
     style="transition-duration: {timeout}ms;" />

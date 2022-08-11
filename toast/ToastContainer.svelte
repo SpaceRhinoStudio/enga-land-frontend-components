@@ -7,18 +7,18 @@
   this component is a singleton and is not meant to be rendered more than once
  -->
 <script lang="ts" context="module">
-  const levelClassNames: { [key in ToastType]: string } = {
-    [ToastType.alert]: 'bg-blue-500',
-    [ToastType.error]: 'bg-blood',
-    [ToastType.info]: 'bg-neutral-700',
-    [ToastType.success]: 'bg-secondary-600',
-    [ToastType.warning]: 'bg-shiningOrange',
+  const levelClassNames: { [key in ToastLevel]: string } = {
+    [ToastLevel.ALERT]: 'bg-blue-500',
+    [ToastLevel.ERROR]: 'bg-blood',
+    [ToastLevel.INFO]: 'bg-neutral-700',
+    [ToastLevel.SUCCESS]: 'bg-secondary-600',
+    [ToastLevel.WARNING]: 'bg-shiningOrange',
   }
 </script>
 
 <script lang="ts">
   import { config } from '../configs'
-  import { DetailedToast, flashToast$, ToastType } from '../contexts/flash-toast'
+  import { DetailedToast, flashToast$, ToastLevel } from '../contexts/flash-toast'
   import _ from 'lodash'
   import { map, scan, Subject, tap, timer } from 'rxjs'
   import ToastInner from './ToastInner.svelte'
@@ -29,12 +29,14 @@
   import { flip } from 'svelte/animate'
   import { portal } from '../actions/portal'
 
+  //TODO: pause all timers when document is not focused (implement focusScheduler)
+
   const toastControl$ = new Subject<
     Partial<{
       Show: DetailedToast & {
         id: number
         timeout: number
-        level: ToastType
+        level: ToastLevel
         dismiss?: 'right' | 'left'
       }
       Remove: number
@@ -52,7 +54,7 @@
         timeout:
           x.timeout ??
           (x.message.startsWith('E0x') ? config.Delays.errorFlash : config.Delays.confirm),
-        level: x.level ?? ToastType.alert,
+        level: x.level ?? ToastLevel.ALERT,
       })),
       tap(() => counter.current++),
       tap(x => timer(x.timeout).subscribe(() => toastControl$.next({ Remove: x.id }))),
@@ -80,7 +82,7 @@
       [] as (DetailedToast & {
         id: number
         timeout: number
-        level: ToastType
+        level: ToastLevel
         dismiss?: 'right' | 'left'
       })[],
     ),

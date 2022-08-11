@@ -4,18 +4,18 @@
 
 import { Subject } from 'rxjs'
 
-export enum ToastType {
-  success = 'success',
-  alert = 'alert',
-  info = 'info',
-  warning = 'warning',
-  error = 'error',
+export enum ToastLevel {
+  INFO,
+  SUCCESS,
+  ALERT,
+  WARNING,
+  ERROR,
 }
 
 export type DetailedToast = {
   message: string
   timeout?: number
-  level?: ToastType
+  level?: ToastLevel
 }
 
 export const flashToast$ = new Subject<string | DetailedToast>()
