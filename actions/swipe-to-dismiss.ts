@@ -28,6 +28,8 @@ function removeTransition(node: HTMLElement) {
     .join(', ')
 }
 
+//TODO: use passive event listeners for better performance, if possible
+
 /**
  * @description svelte action to monitor drags (swipes) on both pointer and touch for the given node
  * the node will move along with the swipe
