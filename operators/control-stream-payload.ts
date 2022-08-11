@@ -101,3 +101,11 @@ export function setLoadingFor<Payloads extends { Loading?: boolean }>(
 ): <T>(state: boolean) => MonoTypeOperatorFunction<T> {
   return state => tap(() => control$.next({ Loading: state } as Partial<Payloads>))
 }
+
+export function setLoadingForId<
+  Payloads extends { Loading?: boolean | { id: string; value: boolean } },
+>(
+  control$: Subject<Partial<Payloads>>,
+): <T>(id: string, state: boolean) => MonoTypeOperatorFunction<T> {
+  return (id, value) => tap(() => control$.next({ Loading: { id, value } } as Partial<Payloads>))
+}
