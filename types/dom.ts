@@ -8,7 +8,7 @@ export type Screens = 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
 export type ClassName = string | undefined | { [className: string]: boolean } | ClassName[]
 
-export type ImageSrc = ValueTypeOfKey<ImageProps, 'src'>
+// export type ImageSrc = ValueTypeOfKey<ImageProps, 'src'>
 
 export type ControlStreamData<Actions extends string, Payloads extends _.Dictionary<unknown>> = {
   action: Actions
