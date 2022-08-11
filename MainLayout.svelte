@@ -26,7 +26,6 @@
   import _ from 'lodash'
   import { onMount, setContext, tick } from 'svelte'
   import Footer from './Footer.svelte'
-  import EngaLogo from './assets/favicon.png'
   import cn from 'classnames'
   import HeaderLayout from './HeaderLayout.svelte'
   import { Routes } from './configs/routes'
@@ -85,10 +84,6 @@
 
   export let headerBlurContainer = false
 </script>
-
-<svelte:head>
-  <link rel="shortcut icon" href={EngaLogo} />
-</svelte:head>
 
 <MobileHoverFix />
 <MobileVhFix />
