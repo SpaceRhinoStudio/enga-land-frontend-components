@@ -26,7 +26,6 @@
   import _ from 'lodash'
   import { onMount, setContext, tick } from 'svelte'
   import Footer from './Footer.svelte'
-  import EngaLogo from './assets/favicon.png'
   import cn from 'classnames'
   import HeaderLayout from './HeaderLayout.svelte'
   import { Routes } from './configs/routes'
@@ -86,10 +85,6 @@
   export let headerBlurContainer = false
 </script>
 
-<svelte:head>
-  <link rel="shortcut icon" href={EngaLogo} />
-</svelte:head>
-
 <MobileHoverFix />
 <MobileVhFix />
 <MainLoadingOverlay />
@@ -105,7 +100,9 @@
     <main
       style="padding-bottom: calc({footerHeight}px + 1.25rem);"
       class={cn(
-        'min-h-[calc(var(--h-screen)-theme(spacing.24))] md:min-h-[calc(var(--h-screen)-theme(spacing.28))]',
+        floatingHeader
+          ? 'min-h-[calc(var(--h-screen)+theme(spacing.72))] md:min-h-[var(--h-screen)]'
+          : 'min-h-[calc(var(--h-screen)+theme(spacing.72))] md:min-h-[calc(var(--h-screen)-theme(spacing.28))]',
         !floatingHeader && 'mt-24 md:mt-28',
         small
           ? 'max-w-[min(calc(100%-theme(spacing.10)),theme(screens.lg))]'
