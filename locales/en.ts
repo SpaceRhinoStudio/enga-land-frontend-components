@@ -1,5 +1,5 @@
 import { Routes } from '../configs/routes'
-import { ToastType } from '../contexts/flash-toast'
+import { ToastLevel } from '../contexts/flash-toast'
 import {
   CosmeticSlots,
   EndroItemType,
@@ -10,16 +10,22 @@ import {
 } from '../types/enga'
 import { WebsiteLocale } from './interface'
 import { EndroSortOptions, MarketplaceSortOptions } from '../types/marketplace'
+import { Web3ProviderId } from '$lib/types'
 
 const locale: WebsiteLocale = new WebsiteLocale({
   main: {
     helloWorld: 'hello world!',
     genericErrorMessage: 'Something went wrong',
     unknown: 'unknown!',
-    done: 'done!',
+    done: 'Done!',
     noItem: 'Nothing to show...',
     notAvailable: 'N/A',
     loadMore: 'Load More',
+    requirementsNotMet: 'Some requirements are not met',
+    onlineStatus: {
+      offline: "You're offline!",
+      online: "You're back online",
+    },
   },
   landing: {
     header: {
@@ -238,11 +244,11 @@ const locale: WebsiteLocale = new WebsiteLocale({
     validations: { numberNotValid: 'Input is not a valid number' },
     web3: { pendingTx: 'Pending' },
     toastTitles: {
-      [ToastType.alert]: 'Alert',
-      [ToastType.error]: 'Error!',
-      [ToastType.info]: 'Info',
-      [ToastType.success]: 'Success!',
-      [ToastType.warning]: 'Warning!',
+      [ToastLevel.ALERT]: 'Alert',
+      [ToastLevel.ERROR]: 'Error!',
+      [ToastLevel.INFO]: 'Info',
+      [ToastLevel.SUCCESS]: 'Success!',
+      [ToastLevel.WARNING]: 'Warning!',
     },
   },
   web3Provider: {
@@ -265,10 +271,10 @@ const locale: WebsiteLocale = new WebsiteLocale({
     submittingSignatureFailed: 'Something went wrong submitting your signature.',
   },
   walletProviders: {
-    metamask: 'Metamask',
-    binanceChain: 'Binance Chain',
-    trust: 'Trust',
-    safePal: 'Safepal',
+    [Web3ProviderId.metamask]: 'Metamask',
+    [Web3ProviderId.binanceChain]: 'Binance Chain',
+    [Web3ProviderId.trust]: 'Trust',
+    [Web3ProviderId.safePal]: 'Safepal',
   },
   presale: {
     stillPending: 'There is no sale going on right now...',
@@ -320,7 +326,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
       lowerThanMinimum: min => `Should be higher than ${min}`,
       cannotRemoveAgreement: 'You cannot take back your agreement',
       shouldAgree: 'You need to accept terms and conditions',
-      kyc: 'You are not authorized to participate in this sale, please complete your KYC',
+      kyc: 'You are not authorized to participate in this sale, Please complete your KYC',
     },
   },
   marketplace: {

@@ -1,5 +1,5 @@
 import type { Routes } from '../configs/routes'
-import type { ToastType } from '../contexts/flash-toast'
+import type { ToastLevel } from '../contexts/flash-toast'
 import type { VestingType } from '$lib/observables/pre-sale/signers-vestings'
 import type { Web3ProviderId } from '$lib/types'
 import type { ValueTypeUnion } from '../types'
@@ -19,11 +19,16 @@ export interface WebsiteLocaleData {
   main: {
     helloWorld: string
     genericErrorMessage: string
+    requirementsNotMet: string
     unknown: string
     done: string
     noItem: string
     notAvailable: string
     loadMore: string
+    onlineStatus: {
+      online: string
+      offline: string
+    }
   }
   landing: {
     header: {
@@ -92,7 +97,7 @@ export interface WebsiteLocaleData {
     web3: {
       pendingTx: string
     }
-    toastTitles: { [key in ToastType]: string }
+    toastTitles: { [key in ToastLevel]: string }
   }
   web3Provider: {
     changedWillReload: string
