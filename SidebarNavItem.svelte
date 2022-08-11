@@ -9,6 +9,7 @@
   import Link from './Link.svelte'
   import { __$ } from './locales'
   import { config } from './configs'
+  import cn from 'classnames'
 
   export let item: RouteConfig
   export let className = ''
@@ -25,20 +26,21 @@
   className={{ element: `block relative text-lg py-3 transition-all ${className}` }}>
   {#if match}
     <div
-      class={`
-        flex items-center space-x-2
-        before:opacity-0
-        before:content-[""]
-        before:absolute
-        before:-left-10
-        before:w-6
-        before:h-6
-        before:shadow-[theme(colors.secondary.600)_0px_0px_20px_5px]
-        before:rounded-full
-        before:bg-secondary-500
-        before:transition-all
-        ${match?.partial ? `text-secondary-500 ${match.exact ? 'before:opacity-100' : ''}` : ''}
-      `}>
+      class={cn(
+        'flex items-center space-x-2',
+        'before:opacity-0',
+        'before:content-[""]',
+        'before:absolute',
+        'before:-left-10',
+        'before:w-6',
+        'before:h-6',
+        'before:shadow-[theme(colors.secondary.600)_0px_0px_20px_5px]',
+        'before:rounded-full',
+        'before:bg-secondary-500',
+        'before:transition-all',
+        !subRoutes.length &&
+          match?.partial && ['text-secondary-500', match.exact && 'before:opacity-100'],
+      )}>
       <SvgIcon Icon={item.icon} width={'1.375rem'} height={'1.375rem'} />
       <span>{$__$?.nav[item.id]}</span>
       {#if subRoutes.length}
