@@ -25,69 +25,6 @@
 </div>
 
 <style lang="postcss">
-  @keyframes rotateLoadingSpinnerT {
-    0% {
-      transform: translate(0, 0);
-    }
-
-    33% {
-      transform: translateX(calc((var(--containerDimensions) - var(--subjectDimensions)) / 2))
-        translateY(calc(var(--containerDimensions) - var(--subjectDimensions)));
-    }
-
-    66% {
-      transform: translateX(
-          calc(-1 * ((var(--containerDimensions) - var(--subjectDimensions)) / 2))
-        )
-        translateY(calc(var(--containerDimensions) - var(--subjectDimensions)));
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-
-  @keyframes rotateLoadingSpinnerBR {
-    0% {
-      transform: translate(0, 0);
-    }
-
-    33% {
-      transform: translateX(calc(-1 * ((var(--containerDimensions) - var(--subjectDimensions)))))
-        translateY(0);
-    }
-
-    66% {
-      transform: translateX(
-          calc(-1 * ((var(--containerDimensions) - var(--subjectDimensions)) / 2))
-        )
-        translateY(calc(-1 * (var(--containerDimensions) - var(--subjectDimensions))));
-    }
-
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-
-  @keyframes rotateLoadingSpinnerBL {
-    0% {
-      transform: translate(0, 0);
-    }
-
-    33% {
-      transform: translateX(calc(((var(--containerDimensions) - var(--subjectDimensions)) / 2)))
-        translateY(calc(-1 * (var(--containerDimensions) - var(--subjectDimensions))));
-    }
-
-    66% {
-      transform: translateX(calc(((var(--containerDimensions) - var(--subjectDimensions)))))
-        translateY(0);
-    }
-
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-
   .container {
     --containerDimensions: 5em;
 
@@ -108,6 +45,71 @@
 
       transform: scale(calc(20% + (var(--big, 0) * 80%)));
       transform-origin: top left;
+
+      @keyframes rotateLoadingSpinnerT {
+        0% {
+          transform: translate(0, 0);
+        }
+
+        33% {
+          transform: translateX(calc((var(--containerDimensions) - var(--subjectDimensions)) / 2))
+            translateY(calc(var(--containerDimensions) - var(--subjectDimensions)));
+        }
+
+        66% {
+          transform: translateX(
+              calc(-1 * ((var(--containerDimensions) - var(--subjectDimensions)) / 2))
+            )
+            translateY(calc(var(--containerDimensions) - var(--subjectDimensions)));
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+
+      @keyframes rotateLoadingSpinnerBR {
+        0% {
+          transform: translate(0, 0);
+        }
+
+        33% {
+          transform: translateX(
+              calc(-1 * ((var(--containerDimensions) - var(--subjectDimensions))))
+            )
+            translateY(0);
+        }
+
+        66% {
+          transform: translateX(
+              calc(-1 * ((var(--containerDimensions) - var(--subjectDimensions)) / 2))
+            )
+            translateY(calc(-1 * (var(--containerDimensions) - var(--subjectDimensions))));
+        }
+
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+
+      @keyframes rotateLoadingSpinnerBL {
+        0% {
+          transform: translate(0, 0);
+        }
+
+        33% {
+          transform: translateX(calc(((var(--containerDimensions) - var(--subjectDimensions)) / 2)))
+            translateY(calc(-1 * (var(--containerDimensions) - var(--subjectDimensions))));
+        }
+
+        66% {
+          transform: translateX(calc(((var(--containerDimensions) - var(--subjectDimensions)))))
+            translateY(0);
+        }
+
+        100% {
+          transform: translate(0, 0);
+        }
+      }
 
       div {
         width: var(--subjectDimensions);

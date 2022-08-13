@@ -13,7 +13,7 @@
 
 {#if visible}
   <div
-    transition:fade
+    transition:fade|local
     style="transform: translate3d(0, 0, 0);"
     class="absolute inset-0 !m-0 z-30 pointer-events-none select-none flex justify-center items-center {className.container}">
     <LoadingSpinner />

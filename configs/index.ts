@@ -101,5 +101,5 @@ export const config = {
   routeConfig,
   DOMAINS,
   ENGAIconUrl: '/public/enga-token-logo.jpg',
-  logQueryMaximumBlockRange: 5000,
+  logQueryMaximumBlockRange: 1000,
 }
