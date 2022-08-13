@@ -307,7 +307,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
     vestings: {
       title: 'Open Vestings List',
       headers: {
-        txId: 'TX ID',
+        vestId: 'Vest ID',
         amount: 'Amount',
         price: 'Price',
         released: 'Released',
