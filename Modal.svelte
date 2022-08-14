@@ -13,6 +13,7 @@
   import cn from 'classnames'
   import { useWobble } from './helpers/wobble-svelte'
   import { shouldHideOverflowController$ } from './contexts/should-hide-overflow'
+  import _ from 'lodash'
 
   /** @lends */
   export let isOpen = false
@@ -22,8 +23,8 @@
    */
   export let acceptExit = false
   /** @readonly */
-  export const toggle = () => {
-    isOpen = !isOpen
+  export const toggle = (state?: boolean) => {
+    isOpen = _.isNil(state) ? !isOpen : state
   }
   /**
    * @description wether the modal is animated from left or down (default)

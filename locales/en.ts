@@ -26,6 +26,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
       offline: "You're offline!",
       online: "You're back online",
     },
+    ok: 'OK',
   },
   landing: {
     header: {

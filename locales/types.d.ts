@@ -29,6 +29,7 @@ export interface WebsiteLocaleData {
       online: string
       offline: string
     }
+    ok: string
   }
   landing: {
     header: {
