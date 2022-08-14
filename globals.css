@@ -170,3 +170,7 @@ a {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.web3modal-modal-lightbox {
+  z-index: 9999 !important;
+}
