@@ -183,8 +183,10 @@ const locale: WebsiteLocale = new WebsiteLocale({
           items: [
             { value: 300_000, name: 'Seed Sale' },
             { value: 1_000_000, name: 'DAO' },
-            { value: 1_700_000, name: 'Stake Holders' },
+            { value: 1_530_000, name: 'Team' },
             { value: 2_000_000, name: 'Presale' },
+            { value: 3_000_000, name: 'Stake Holders' },
+            { value: 170_000, name: 'Marketing' },
           ],
         },
         {
@@ -298,7 +300,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
         ENGA: 'ENGA',
         price: 'Price',
       },
-      earlyInvestors: 'Early Investors',
+      earlyInvestors: 'Seed Sale',
       preSale: 'Pre Sale',
       marketing: 'Marketing',
       dao: 'DAO',
