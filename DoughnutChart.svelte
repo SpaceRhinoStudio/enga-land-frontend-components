@@ -42,7 +42,7 @@
         roseType: 'area',
         label: {
           show: true,
-          lineHeight: $screen$.isMobile ? 15 : 25,
+          lineHeight: $screen$.isMobile ? 15 : 35,
           formatter: '{b} \n {d}%',
           fontSize: '1em',
           fontFamily: serif ? 'Passion One' : 'Poppins',

@@ -181,11 +181,11 @@ const locale: WebsiteLocale = new WebsiteLocale({
         {
           title: 'Initial Supply',
           items: [
-            { value: 300_000, name: 'Seed Sale' },
             { value: 1_000_000, name: 'DAO' },
+            { value: 300_000, name: 'Seed Sale' },
             { value: 1_530_000, name: 'Team' },
-            { value: 2_000_000, name: 'Presale' },
             { value: 3_000_000, name: 'Stake Holders' },
+            { value: 2_000_000, name: 'Presale' },
             { value: 170_000, name: 'Marketing' },
           ],
         },
