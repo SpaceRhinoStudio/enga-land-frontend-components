@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { DOMAINS, routeConfig } from './routes'
 
 export const config = {
@@ -102,4 +101,5 @@ export const config = {
   DOMAINS,
   ENGAIconUrl: '/public/enga-token-logo.jpg',
   logQueryMaximumBlockRange: 1000,
+  apiAddress: 'https://enga-cache.aboosakamod.money',
 }
