@@ -6,6 +6,7 @@
 -->
 <script lang="ts">
   import cn from 'classnames'
+  import { writable } from 'svelte/store'
   import { pulse } from './actions/pulse'
   import { canHover$ } from './helpers/media-queries'
   import HoverState from './HoverState.svelte'
@@ -55,11 +56,14 @@
   export let style = ''
 
   let isJobLoading = false
+
+  const disabledStore = writable(disabled)
+  $: disabledStore.set(disabled)
 </script>
 
 <HoverState let:hoverState>
   <button
-    use:pulse={{ should: disabled }}
+    use:pulse={{ should$: disabledStore }}
     {style}
     class={cn(
       !overrideStyles && [
