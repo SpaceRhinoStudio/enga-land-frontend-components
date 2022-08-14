@@ -1,7 +1,7 @@
 import type { Routes } from '../configs/routes'
 import type { ToastLevel } from '../contexts/flash-toast'
 import type { VestingType } from '$lib/observables/pre-sale/signers-vestings'
-import type { Web3ProviderId } from '$lib/types'
+import type { Web3ProviderId } from '../types'
 import type { ValueTypeUnion } from '../types'
 import type {
   CosmeticSlots,

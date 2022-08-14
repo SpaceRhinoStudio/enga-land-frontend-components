@@ -4,7 +4,7 @@
 
 import { SENTINEL, type Sentinel } from '$lib/shared/contexts/empty-sentinel'
 import _ from 'lodash'
-import type { NonUndefinable, Option } from '$lib/types'
+import type { NonUndefinable, Option } from '$lib/shared/types'
 
 export function noSentinelOrUndefined<T>(
   value: T | Sentinel | undefined,

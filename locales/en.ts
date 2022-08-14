@@ -10,7 +10,7 @@ import {
 } from '../types/enga'
 import { WebsiteLocale } from './interface'
 import { EndroSortOptions, MarketplaceSortOptions } from '../types/marketplace'
-import { Web3ProviderId } from '$lib/types'
+import { Web3ProviderId } from '../types'
 
 const locale: WebsiteLocale = new WebsiteLocale({
   main: {
