@@ -300,8 +300,10 @@ const locale: WebsiteLocale = new WebsiteLocale({
       },
       earlyInvestors: 'Early Investors',
       preSale: 'Pre Sale',
+      marketing: 'Marketing',
       dao: 'DAO',
-      stakeHolders: 'Stake Holders',
+      stakeHolders: 'Team',
+      vc: 'Stake Holders',
       initialSupply: 'Initial Supply',
     },
     vestings: {

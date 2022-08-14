@@ -144,8 +144,10 @@ export interface WebsiteLocaleData {
       }
       earlyInvestors: string
       preSale: string
+      marketing: string
       dao: string
       stakeHolders: string
+      vc: string
       initialSupply: string
     }
     vestings: {
