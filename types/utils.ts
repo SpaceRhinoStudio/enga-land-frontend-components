@@ -165,10 +165,4 @@ export type Option$<T> = Observable<Option<T>>
 
 export type CastTuple<T> = T extends readonly unknown[] ? T : readonly [T]
 
-export type DeepCons<T, R> = T extends readonly unknown[]
-  ? R extends readonly unknown[]
-    ? readonly [...T, ...R]
-    : readonly [...T, R]
-  : R extends readonly unknown[]
-  ? readonly [T, ...R]
-  : readonly [T, R]
+export type DeepCons<T, R> = readonly [...CastTuple<T>, ...CastTuple<R>]
