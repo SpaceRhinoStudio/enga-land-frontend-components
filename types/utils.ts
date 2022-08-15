@@ -18,6 +18,8 @@ export type ValueTypeOfKey<T, K extends keyof T> = Pick<T, K> extends {
 
 export type ValueTypeUnion<T> = keyof T extends infer K ? (K extends keyof T ? T[K] : never) : never
 
+export type MemberTypeUnion<T> = T extends (infer E)[] ? E : T
+
 export type TimeUnit = 's' | 'm' | 'h' | 'd' | 'y'
 
 export type NonUndefinable<T> = T extends undefined ? never : T
@@ -78,7 +80,9 @@ export type Some<T> = T extends NonNullable<infer S> ? S : never
 
 //TODO: add object support
 //TODO: add deep support
-export type SomeMembers<T> = Some<T> extends readonly unknown[] ? TruthyOfArray<Some<T>> : Some<T>
+export type SomeMembers<T> = Some<T> extends readonly unknown[]
+  ? TruthyOfArrayAggressive<UnReadonly<Some<T>>>
+  : Some<T>
 
 /**
  * @description or just use
@@ -100,6 +104,49 @@ export type TruthyOfArray<
     : Result
   : never
 
+export type TruthyOfArrayAggressive<
+  Arr,
+  Result extends readonly unknown[] = [],
+  Index extends number[] = [],
+> = Arr extends readonly unknown[]
+  ? Arr extends []
+    ? Result
+    : Arr extends [infer Head, ...infer Tail]
+    ? TruthyOfArrayAggressive<
+        [...Tail],
+        Some<Head> extends never ? never : [...Result, Some<Head>],
+        [...Index, 1]
+      >
+    : Result
+  : never
+
+export type HasNeverMember<
+  Arr,
+  Result extends boolean = false,
+  Index extends number[] = [],
+> = Arr extends readonly unknown[]
+  ? Arr extends []
+    ? Result
+    : Arr extends [infer Head, ...infer Tail]
+    ? HasNeverMember<[...Tail], never extends Head ? true : Result, [...Index, 1]>
+    : Result
+  : never
+
+export type ExtraTypeForMembers<
+  Arr,
+  T,
+  Result extends readonly unknown[] = [],
+  Index extends number[] = [],
+> = Arr extends readonly unknown[]
+  ? Arr extends []
+    ? Result
+    : Arr extends [infer Head, ...infer Tail]
+    ? ExtraTypeForMembers<[...Tail], T, [...Result, Head | T], [...Index, 1]>
+    : Result
+  : never
+
+export type UnReadonly<T> = T extends readonly [...infer E] ? E : T
+
 export type Option<T> = T | Nil
 
 export type OptionMembers<
@@ -115,3 +162,13 @@ export type OptionMembers<
   : never
 
 export type Option$<T> = Observable<Option<T>>
+
+export type CastTuple<T> = T extends readonly unknown[] ? T : readonly [T]
+
+export type DeepCons<T, R> = T extends readonly unknown[]
+  ? R extends readonly unknown[]
+    ? readonly [...T, ...R]
+    : readonly [...T, R]
+  : R extends readonly unknown[]
+  ? readonly [T, ...R]
+  : readonly [T, R]
