@@ -99,7 +99,7 @@
         (isLoading || isJobLoading) &&
           'cursor-wait disabled:cursor-wait text-transparent hover:text-transparent disabled:text-transparent',
         secondary
-          ? 'py-1 px-2 rounded-xl text-xs bg-primary-600 leading-none'
+          ? 'py-1 px-2 rounded-xl text-xs bg-primary-600 leading-none disabled:hover:border-primary-600'
           : 'py-2 px-4 rounded-lg disabled:border-gray-500',
       ],
       className,
