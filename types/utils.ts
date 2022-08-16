@@ -166,3 +166,13 @@ export type Option$<T> = Observable<Option<T>>
 export type CastTuple<T> = T extends readonly unknown[] ? T : readonly [T]
 
 export type DeepCons<T, R> = readonly [...CastTuple<T>, ...CastTuple<R>]
+
+export type SerializableBase = string | number | boolean | Date
+
+export type SerializableCollection =
+  | { [key: string]: SerializableBase | SerializableCollection }
+  | (SerializableBase | SerializableCollection)[]
+
+export type Serializable = SerializableBase | SerializableCollection
+
+export type LogLevel = 'FATAL' | 'ERROR' | 'WARN' | 'NOTICE' | 'INFO' | 'DEBUG' | 'TRACE'
