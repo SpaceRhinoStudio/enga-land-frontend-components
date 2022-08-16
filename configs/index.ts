@@ -3,7 +3,7 @@ import { DOMAINS, routeConfig } from './routes'
 export const config = {
   Delays: {
     mainLoadingMin: 1000,
-    errorFlash: 6000,
+    errorFlash: 12_000,
     min: 300,
     confirm: 2000,
     timeout: 20000,
