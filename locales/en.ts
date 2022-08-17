@@ -243,7 +243,7 @@ const locale: WebsiteLocale = new WebsiteLocale({
     notFound: "You're Lost!",
   },
   userInteraction: {
-    confirmation: { cancel: 'Cancel', confirm: 'Confirm' },
+    confirmation: { cancel: 'Cancel', confirm: 'Confirm', close: 'Close' },
     validations: { numberNotValid: 'Input is not a valid number' },
     web3: { pendingTx: 'Pending' },
     toastTitles: {

@@ -91,6 +91,7 @@ export interface WebsiteLocaleData {
     confirmation: {
       confirm: string
       cancel: string
+      close: string
     }
     validations: {
       numberNotValid: string
