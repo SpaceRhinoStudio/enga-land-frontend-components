@@ -36,8 +36,6 @@
     );
 
     .spinner {
-      /* --containerDimensions: calc(1.25rem + (3.75rem * var(--big, 0))); */
-      /* --subjectDimensions: calc(0.5rem + (1.25rem * var(--big, 0))); */
       --subjectDimensions: 2em;
       --duration: 2s;
       width: var(--containerDimensions);
@@ -114,7 +112,6 @@
       div {
         width: var(--subjectDimensions);
         height: var(--subjectDimensions);
-        /* border-width: calc(1px + (var(--big, 0) * 3px)); */
         border-width: 4px;
 
         animation-duration: var(--duration);
@@ -136,6 +133,25 @@
           animation-name: rotateLoadingSpinnerBL;
           top: calc(var(--containerDimensions) - var(--subjectDimensions));
           left: 0;
+        }
+      }
+    }
+  }
+
+  /* this media query means safari only, the scale looks very pixelated on safari so we have smaller dimensions instead of scale on safari */
+  /* mediaQuery source: https://browserstrangeness.bitbucket.io/css_hacks.html#safari */
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      div.container {
+        --containerDimensions: calc(1em + (4em * var(--big, 0)));
+        width: unset;
+        height: unset;
+        div.spinner {
+          --subjectDimensions: calc(0.4em + (1.6em * var(--big, 0)));
+          transform: unset;
+          div {
+            border-width: calc(1px + (var(--big, 0) * 3px));
+          }
         }
       }
     }
