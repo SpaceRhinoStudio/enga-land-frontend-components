@@ -272,6 +272,13 @@ const locale: WebsiteLocale = new WebsiteLocale({
     },
     signFailed: 'you should connect to web3...',
     submittingSignatureFailed: 'Something went wrong submitting your signature.',
+    waitingForTx: {
+      title: 'Transaction Request',
+      rejectButton: 'Reject',
+      warningText:
+        "We're waiting for your response on your wallet application.\nIf you accept the transaction from your wallet, rejecting this prompt will not stop blockchain from processing your request.\nIf you have accepted the transaction on your wallet and you are still seeing this, to stop making duplicate transactions kindly wait for 5 minutes so everything on blockchain is final, and refresh the web page.",
+      agreement: 'I have read and understood the above',
+    },
   },
   walletProviders: {
     [Web3ProviderId.metamask]: 'Metamask',

@@ -6,12 +6,14 @@
 -->
 <script lang="ts">
   import cn from 'classnames'
+  import _ from 'lodash'
   import { writable } from 'svelte/store'
   import { pulse } from './actions/pulse'
   import { canHover$ } from './helpers/media-queries'
   import HoverState from './HoverState.svelte'
   import LoadingOverlay from './LoadingOverlay.svelte'
   import ToolTip from './ToolTip.svelte'
+  import { Option } from './types'
 
   /**
    * @description use active styles
@@ -51,7 +53,11 @@
    * @description a tip to be shown when hovered
    * @default undefined
    */
-  export let tooltip: string | undefined = undefined
+  export let tooltip: Option<string | false> = undefined
+  /** @default false */
+  export let showTooltipWhenLoading = false
+  /** @default false */
+  export let showTooltipWhenEnabled = false
   export let className = ''
   export let style = ''
 
@@ -59,6 +65,13 @@
 
   const disabledStore = writable(disabled)
   $: disabledStore.set(disabled)
+
+  $: shouldShowTooltip =
+    _.isString(tooltip) &&
+    tooltip.length &&
+    (((isLoading || isJobLoading) && showTooltipWhenLoading) ||
+      (!(isLoading || isJobLoading) && !disabled && showTooltipWhenEnabled) ||
+      (disabled && !(isLoading || isJobLoading)))
 </script>
 
 <HoverState let:hoverState>
@@ -86,7 +99,7 @@
         (isLoading || isJobLoading) &&
           'cursor-wait disabled:cursor-wait text-transparent hover:text-transparent disabled:text-transparent',
         secondary
-          ? 'py-1 px-2 rounded-xl text-xs bg-primary-600 leading-none'
+          ? 'py-1 px-2 rounded-xl text-xs bg-primary-600 leading-none disabled:hover:border-primary-600'
           : 'py-2 px-4 rounded-lg disabled:border-gray-500',
       ],
       className,
@@ -119,7 +132,7 @@
       <slot isLoading={isLoading || isJobLoading} />
     </div>
     <LoadingOverlay visible={isLoading || isJobLoading} />
-    {#if tooltip?.length && hoverState}
+    {#if hoverState && shouldShowTooltip}
       <ToolTip>{tooltip}</ToolTip>
     {/if}
   </button>

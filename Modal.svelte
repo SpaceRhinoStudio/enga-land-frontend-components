@@ -24,7 +24,7 @@
   export let acceptExit = false
   /** @readonly */
   export const toggle = (state?: boolean) => {
-    isOpen = _.isNil(state) ? !isOpen : state
+    isOpen = _.isBoolean(state) ? state : !isOpen
   }
   /**
    * @description wether the modal is animated from left or down (default)

@@ -118,6 +118,12 @@ export interface WebsiteLocaleData {
     }
     signFailed: string
     submittingSignatureFailed: string
+    waitingForTx: {
+      title: string
+      warningText: string
+      rejectButton: string
+      agreement: string
+    }
   }
   walletProviders: {
     [id in Web3ProviderId]: string
