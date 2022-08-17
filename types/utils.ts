@@ -165,7 +165,7 @@ export type Option$<T> = Observable<Option<T>>
 
 export type CastTuple<T> = T extends readonly unknown[] ? T : readonly [T]
 
-export type DeepCons<T, R> = readonly [...CastTuple<T>, ...CastTuple<R>]
+export type ShallowCons<T, R> = readonly [...CastTuple<T>, ...CastTuple<R>]
 
 export type SerializableBase = string | number | boolean | Date
 
