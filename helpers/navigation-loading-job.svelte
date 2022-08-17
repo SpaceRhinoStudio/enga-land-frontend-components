@@ -22,7 +22,8 @@
   beforeNavigate(({ to, cancel }) => {
     if (!whitelist.to && to?.pathname) {
       cancel()
-      whitelist.to = to.pathname
+      whitelist.to =
+        to.host === window.location.host ? to.pathname : to.protocol + to.host + to.pathname
       pageLoadingJobs$.next(new Promise<void>(res => (resolve.current = res)))
       setTimeout(() => {
         goto(whitelist.to ?? '/')
