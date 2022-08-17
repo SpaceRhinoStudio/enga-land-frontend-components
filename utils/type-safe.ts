@@ -4,7 +4,7 @@
 
 import { isSentinel, type Sentinel } from '../contexts/empty-sentinel'
 import _ from 'lodash'
-import type { CastTuple, Option } from '../types'
+import type { CastTuple, Option, SerializableBase } from '../types'
 
 export function keysOf<K extends string | number = number>(
   source: Option<{ [x in K]?: unknown } | unknown[] | Sentinel>,
@@ -25,4 +25,11 @@ export function isArray<T extends readonly unknown[], S>(x: T | S): x is T {
 
 export function castArray<T>(source: T): CastTuple<T> {
   return _.castArray(source) as any
+}
+
+export function isSerializableBase(x: unknown): x is SerializableBase {
+  if (_.isString(x) || _.isNumber(x) || _.isBoolean(x) || _.isDate(x)) {
+    return true
+  }
+  return false
 }
