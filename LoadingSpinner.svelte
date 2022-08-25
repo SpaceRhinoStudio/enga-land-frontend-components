@@ -140,7 +140,7 @@
 
   /* this media query means safari only, the scale looks very pixelated on safari so we have smaller dimensions instead of scale on safari */
   /* mediaQuery source: https://browserstrangeness.bitbucket.io/css_hacks.html#safari */
-  @media not all and (min-resolution: 0.001dpcm) {
+  /* @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       div.container {
         --containerDimensions: calc(1em + (4em * var(--big, 0)));
@@ -155,5 +155,5 @@
         }
       }
     }
-  }
+  } */
 </style>
