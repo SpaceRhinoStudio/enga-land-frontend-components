@@ -81,8 +81,8 @@ export type RouteConfig = {
 const isLanding = import.meta.env.VITE_IS_LANDING === 'true'
 
 export enum DOMAINS {
-  DAPP_DOMAIN = 'https://app.enga.land',
-  LANDING_DOMAIN = 'https://enga.land',
+  DAPP_DOMAIN = 'https://staging.enga-land-dapp.pages.dev',
+  LANDING_DOMAIN = 'https://enga-land-landing.pages.dev',
 }
 
 const href = {
@@ -140,7 +140,7 @@ export const routeConfig: {
   },
   [Routes.aboutUs]: {
     id: Routes.aboutUs,
-    href: 'https://docs.enga.land/about-us',
+    href: 'https://mehdizarei.gitbook.io/enga-land/about-us',
     icon: AboutUsIcon,
     disabled: false,
   },
@@ -209,7 +209,7 @@ export const routeConfig: {
   },
   [Routes.tokenomics]: {
     id: Routes.tokenomics,
-    href: 'https://docs.enga.land/tokenomic-land/tokenomics',
+    href: 'https://mehdizarei.gitbook.io/enga-land/tokenomic-land/tokenomics',
     icon: TokenomicsIcon,
     disabled: false,
   },
@@ -227,7 +227,7 @@ export const routeConfig: {
   },
   [Routes.docs]: {
     id: Routes.docs,
-    href: 'https://docs.enga.land',
+    href: 'https://mehdizarei.gitbook.io/enga-land',
     icon: DocsIcon,
     disabled: false,
   },
